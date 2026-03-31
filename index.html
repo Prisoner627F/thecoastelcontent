@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Coastal Content Co — AI-Powered Marketing for South West Businesses</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #13111c;
+      --surface: #1b192c;
+      --surface-subtle: #201e30;
+      --border: #2d2b3a;
+      --border-light: #3a3849;
+      --fg: #f7f7f8;
+      --fg-2: #8a8897;
+      --fg-3: #55536a;
+      --accent: #2ECFB8;
+      --accent-dim: rgba(46,207,184,0.12);
+      --accent-border: rgba(46,207,184,0.25);
+      --accent-glow: rgba(46,207,184,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.625;
+    }
+    .serif { font-family: 'IBM Plex Serif', serif; }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s, backdrop-filter 0.3s;
+    }
+    nav.scrolled {
+      border-color: var(--border);
+      background: rgba(19,17,28,0.8);
+      backdrop-filter: blur(16px);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 60px;
+    }
+    .logo {
+      font-size: 15px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--fg); text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+    .logo em { color: var(--fg-3); font-style: normal; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      font-size: 14px; color: var(--fg-2); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .btn-nav {
+      font-size: 13px; font-weight: 600; padding: 7px 16px;
+      border-radius: 8px; text-decoration: none; transition: opacity 0.2s;
+      background: var(--fg); color: var(--bg);
+    }
+    .btn-nav:hover { opacity: 0.85; }
+
+    /* Dot grid */
+    .dot-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, var(--fg-3) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.18;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 140px 24px 80px;
+      text-align: center;
+      background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(46,207,184,0.07) 0%, transparent 60%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 500; color: var(--fg-2);
+      border: 1px solid var(--border); border-radius: 100px;
+      padding: 5px 14px; margin-bottom: 32px;
+      background: var(--surface);
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 68px);
+      font-weight: 700; letter-spacing: -0.035em; line-height: 1.05;
+      margin-bottom: 20px; max-width: 760px; margin-left: auto; margin-right: auto;
+    }
+    .hero h1 em { font-family: 'IBM Plex Serif', serif; font-style: italic; color: var(--accent); }
+    .hero p {
+      font-size: 17px; color: var(--fg-2); max-width: 520px;
+      margin: 0 auto 36px; line-height: 1.65;
+    }
+    .hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 600; padding: 10px 22px;
+      border-radius: 9px; text-decoration: none; cursor: pointer;
+      background: var(--accent); color: #080E1C;
+      box-shadow: 0 0 0 1px rgba(46,207,184,0.3), 0 8px 24px -4px rgba(46,207,184,0.25);
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      border: none;
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(46,207,184,0.4), 0 12px 32px -4px rgba(46,207,184,0.4); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 500; padding: 10px 22px;
+      border-radius: 9px; text-decoration: none;
+      border: 1px solid var(--border); color: var(--fg-2);
+      background: var(--surface);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--border-light); color: var(--fg); background: var(--surface-subtle); }
+
+    /* Hero mockup panel */
+    .hero-panel {
+      max-width: 900px; margin: 0 auto; position: relative;
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 32px 80px -16px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+      background: var(--surface);
+    }
+    .panel-topbar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px; border-bottom: 1px solid var(--border);
+      background: var(--surface-subtle);
+    }
+    .panel-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .panel-title { font-size: 12px; color: var(--fg-3); margin-left: 8px; }
+    .panel-tab {
+      font-size: 12px; padding: 4px 12px; border-radius: 6px;
+      border: 1px solid transparent; color: var(--fg-3); cursor: pointer;
+    }
+    .panel-tab.active { border-color: var(--border); color: var(--fg-2); background: var(--surface); }
+    .panel-body { display: grid; grid-template-columns: 220px 1fr; min-height: 320px; }
+    .panel-sidebar { border-right: 1px solid var(--border); padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; }
+    .sidebar-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 10px; border-radius: 8px; font-size: 13px; color: var(--fg-2);
+      cursor: pointer; transition: background 0.15s, color 0.15s;
+    }
+    .sidebar-item:hover, .sidebar-item.active { background: var(--accent-dim); color: var(--fg); }
+    .sidebar-item .dot-status { width: 6px; height: 6px; border-radius: 50%; margin-left: auto; }
+    .panel-main { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+    .post-card {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; background: var(--surface-subtle);
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .post-icon {
+      width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+    .post-meta { flex: 1; min-width: 0; }
+    .post-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .post-sub { font-size: 12px; color: var(--fg-3); }
+    .post-badge {
+      font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 4px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .badge-green { background: rgba(54,120,89,0.2); color: #6fcf97; }
+    .badge-teal { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-border); }
+    .badge-amber { background: rgba(245,158,11,0.15); color: #fbbf24; }
+
+    /* Trust strip */
+    .trust-strip {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 24px;
+    }
+    .trust-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
+    .trust-label { font-size: 12px; color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; }
+    .trust-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; }
+    .trust-item {
+      padding: 10px 28px; border: 1px solid var(--border);
+      font-size: 13px; font-weight: 500; color: var(--fg-3);
+      border-radius: 0; margin: -1px;
+    }
+    .trust-item:first-child { border-radius: 8px 0 0 8px; }
+    .trust-item:last-child { border-radius: 0 8px 8px 0; }
+
+    /* Feature sections */
+    .features { max-width: 1200px; margin: 0 auto; padding: 80px 24px; position: relative; }
+    .rail {
+      position: absolute; left: 24px; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(180deg, transparent, var(--border) 10%, var(--border) 90%, transparent);
+    }
+    .rail-dot {
+      position: absolute; left: -5px; width: 11px; height: 11px;
+      border-radius: 50%; background: var(--bg);
+      border: 2px solid var(--border-light);
+      box-shadow: 0 0 0 3px var(--bg);
+    }
+    .feature-section {
+      display: grid; grid-template-columns: 1fr 480px; gap: 80px;
+      align-items: center; padding: 80px 0 80px 60px;
+      border-bottom: 1px solid var(--border); position: relative;
+    }
+    .feature-section:last-child { border-bottom: none; }
+    .feature-section.reverse { grid-template-columns: 480px 1fr; }
+    .feature-section.reverse .feature-text { order: 2; }
+    .feature-section.reverse .feature-visual { order: 1; }
+    .feature-tag {
+      display: inline-block; font-size: 12px; font-weight: 600;
+      padding: 3px 10px; border-radius: 5px; margin-bottom: 20px;
+      border: 1px solid var(--accent-border); color: var(--accent);
+      background: var(--accent-dim); text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .feature-text h2 {
+      font-size: clamp(26px, 3vw, 38px); font-weight: 700; letter-spacing: -0.025em;
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .feature-text h2 em { font-family: 'IBM Plex Serif', serif; font-style: italic; }
+    .feature-text p { font-size: 15px; color: var(--fg-2); line-height: 1.7; margin-bottom: 24px; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .feature-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--fg-2); }
+    .feature-list li::before { content: ''; width: 16px; height: 16px; border-radius: 50%; background: var(--accent-dim); border: 1px solid var(--accent-border); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; }
+    .check-item { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--fg-2); }
+    .check-icon { width: 18px; height: 18px; border-radius: 50%; background: var(--accent-dim); border: 1px solid var(--accent-border); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
+    .check-icon svg { display: block; }
+    .learn-more {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 500; color: var(--fg-2);
+      text-decoration: none; transition: color 0.2s, gap 0.2s;
+    }
+    .learn-more:hover { color: var(--fg); gap: 8px; }
+    .learn-more span { font-size: 16px; transition: transform 0.2s; }
+    .learn-more:hover span { transform: translateX(2px); }
+
+    /* Feature visual cards */
+    .visual-card {
+      border: 1px solid var(--border); border-radius: 12px;
+      background: var(--surface); overflow: hidden;
+      box-shadow: 0 8px 32px -8px rgba(0,0,0,0.5);
+    }
+    .visual-topbar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 10px 14px; border-bottom: 1px solid var(--border);
+      background: var(--surface-subtle);
+    }
+    .vdot { width: 9px; height: 9px; border-radius: 50%; }
+    .visual-body { padding: 16px; }
+
+    /* Instagram mock */
+    .ig-post { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+    .ig-header { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+    .ig-avatar { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #7efff5); flex-shrink: 0; }
+    .ig-name { font-size: 12px; font-weight: 600; }
+    .ig-handle { font-size: 11px; color: var(--fg-3); }
+    .ig-image { height: 120px; background: linear-gradient(135deg, #1a2d3a, #0d2233); display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--fg-3); letter-spacing: 0.05em; text-transform: uppercase; }
+    .ig-caption { padding: 10px 12px; font-size: 11px; color: var(--fg-2); line-height: 1.5; }
+    .ig-stats { display: flex; gap: 12px; padding: 0 12px 10px; font-size: 11px; color: var(--fg-3); }
+
+    /* Google profile mock */
+    .gp-card { border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+    .gp-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .gp-cat { font-size: 12px; color: var(--fg-3); margin-bottom: 10px; }
+    .gp-stars { color: #fbbf24; font-size: 14px; margin-bottom: 8px; }
+    .gp-rating { font-size: 13px; color: var(--fg-2); }
+    .gp-stat { display: flex; justify-content: space-between; font-size: 12px; padding: 8px 0; border-top: 1px solid var(--border); color: var(--fg-2); }
+    .gp-stat span:last-child { color: var(--accent); font-weight: 600; }
+
+    /* Stats section */
+    .stats-section { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stats-inner { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+    .stats-heading { text-align: center; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .stats-sub { text-align: center; font-size: 15px; color: var(--fg-2); margin-bottom: 56px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    @media(min-width:768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-cell { background: var(--bg); padding: 32px 24px; text-align: center; }
+    .stat-num { font-size: clamp(32px, 4vw, 48px); font-weight: 800; letter-spacing: -0.04em; color: var(--fg); margin-bottom: 8px; }
+    .stat-label { font-size: 13px; color: var(--fg-2); line-height: 1.5; }
+
+    /* Testimonials marquee */
+    .testimonials { padding: 80px 0; overflow: hidden; }
+    .testimonials-heading { text-align: center; font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; padding: 0 24px; }
+    .testimonials-sub { text-align: center; font-size: 15px; color: var(--fg-2); margin-bottom: 48px; padding: 0 24px; }
+    .marquee-wrapper { position: relative; overflow: hidden; }
+    .marquee-track { display: flex; gap: 16px; animation: marquee 40s linear infinite; width: max-content; }
+    .marquee-track:hover { animation-play-state: paused; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .tcard {
+      flex-shrink: 0; width: 300px; border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; background: var(--surface);
+      transition: border-color 0.2s;
+    }
+    .tcard:hover { border-color: var(--border-light); }
+    .tcard-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .tcard-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .tcard-name { font-size: 13px; font-weight: 600; }
+    .tcard-handle { font-size: 12px; color: var(--fg-3); }
+    .tcard-stars { color: #fbbf24; font-size: 12px; margin-bottom: 8px; }
+    .tcard-text { font-size: 13px; color: var(--fg-2); line-height: 1.6; }
+
+    /* CTA section */
+    .cta-section {
+      border-top: 1px solid var(--border);
+      background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(46,207,184,0.06) 0%, transparent 70%);
+      padding: 100px 24px;
+      text-align: center;
+    }
+    .cta-section h2 { font-size: clamp(32px, 5vw, 56px); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.1; }
+    .cta-section h2 em { font-family: 'IBM Plex Serif', serif; font-style: italic; color: var(--accent); }
+    .cta-section p { font-size: 16px; color: var(--fg-2); max-width: 480px; margin: 0 auto 40px; line-height: 1.65; }
+
+    /* Contact form */
+    .form-wrap { max-width: 520px; margin: 0 auto; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .form-field {
+      width: 100%; padding: 11px 14px; border-radius: 8px; font-size: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--fg); outline: none; font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .form-field::placeholder { color: var(--fg-3); }
+    .form-field:focus { border-color: var(--accent-border); box-shadow: 0 0 0 3px rgba(46,207,184,0.06); }
+    .form-field-full { grid-column: 1 / -1; }
+    textarea.form-field { resize: none; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface-subtle);
+      padding: 56px 24px 32px;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 48px; }
+    @media(min-width:640px) { .footer-top { grid-template-columns: 200px 1fr; } }
+    @media(min-width:900px) { .footer-top { grid-template-columns: 200px repeat(4,1fr); } }
+    .footer-brand p { font-size: 13px; color: var(--fg-3); margin-top: 10px; line-height: 1.6; }
+    .footer-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 14px; color: var(--fg); }
+    .footer-col a { display: block; font-size: 13px; color: var(--fg-3); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--fg-2); }
+    .footer-bottom { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--fg-3); }
+    @media(min-width:640px) { .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
+
+    /* Services grid */
+    .svc-card { cursor: pointer; }
+    .svc-card:hover { border-color: var(--border-light); transform: translateY(-3px); box-shadow: 0 16px 40px -8px rgba(0,0,0,0.5); }
+    .svc-card:active { transform: translateY(-1px); }
+
+    /* Two col stack */
+    .two-col-stack { grid-template-columns: 1fr 1fr; }
+    @media(max-width:767px) { .two-col-stack { grid-template-columns: 1fr !important; gap: 40px !important; } }
+
+    /* Comparison grid */
+    @media(max-width:767px) { .comp-grid { grid-template-columns: 1fr !important; } }
+
+    /* How it works steps */
+    .step-row { display: flex; gap: 16px; align-items: flex-start; }
+    .step-num { width: 32px; height: 32px; border-radius: 8px; background: var(--accent-dim); border: 1px solid var(--accent-border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--accent); }
+
+    /* Fade in */
+    .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade.in { opacity: 1; transform: none; }
+
+    /* Mobile nav */
+    .menu-btn { display: none; background: none; border: none; color: var(--fg-2); cursor: pointer; padding: 4px; }
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 99; background: var(--bg); padding: 80px 24px 24px; flex-direction: column; gap: 24px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-size: 18px; color: var(--fg); text-decoration: none; font-weight: 500; }
+
+    @media(max-width:767px) {
+      .nav-links { display: none; }
+      .menu-btn { display: block; }
+      .feature-section, .feature-section.reverse { grid-template-columns: 1fr !important; gap: 40px; padding: 40px 0 40px 0; }
+      .feature-section.reverse .feature-text { order: 1; }
+      .feature-section.reverse .feature-visual { order: 2; }
+      .panel-body { grid-template-columns: 1fr; }
+      .panel-sidebar { display: none; }
+      .rail { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ────────────────────────────────────────────── -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">coastal<span>content</span><em>co</em></a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#testimonials">Clients</a>
+        <a href="#contact" class="btn-nav">Get a free audit</a>
+      </div>
+      <button class="menu-btn" id="menu-btn" aria-label="Menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="12" x2="17" y2="12"/><line x1="3" y1="18" x2="17" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#services" onclick="closeMobileNav()">Services</a>
+    <a href="#why-us" onclick="closeMobileNav()">Why Us</a>
+    <a href="#pricing" onclick="closeMobileNav()">Pricing</a>
+    <a href="#testimonials" onclick="closeMobileNav()">Clients</a>
+    <a href="#contact" class="btn-primary" style="text-align:center" onclick="closeMobileNav()">Get a free audit →</a>
+  </div>
+
+  <!-- ─── HERO ─────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="dot-grid"></div>
+    <div style="position:relative;z-index:1;">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Content marketing for South West WA — by someone who actually lives here
+      </div>
+      <h1>
+        Content that gets<br/>South West businesses<br/><em>found online.</em>
+      </h1>
+      <p>We use AI to create social media content, manage your Google profile, and write copy that converts — faster and more affordably than any agency in the region.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Get a free audit — it's free <span style="font-size:16px;">→</span></a>
+        <a href="#pricing" class="btn-ghost">See pricing</a>
+      </div>
+      <p style="font-size:13px;color:var(--fg-3);margin-top:16px;">Packages from <strong style="color:var(--fg-2);">$500/month</strong> · No lock-in contracts · Cancel anytime</p>
+
+      <!-- Hero social proof strip -->
+      <div class="fade" style="display:flex;flex-wrap:wrap;justify-content:center;gap:24px;margin-top:8px;">
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg-3);">
+          <svg width="14" height="14" fill="none" stroke="#2ECFB8" stroke-width="2" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          AI-powered content production
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg-3);">
+          <svg width="14" height="14" fill="none" stroke="#2ECFB8" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Based in Busselton/Dunsborough
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg-3);">
+          <svg width="14" height="14" fill="none" stroke="#2ECFB8" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M7 4v3l2 2"/></svg>
+          Results in 30 days or less
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg-3);">
+          <svg width="14" height="14" fill="none" stroke="#2ECFB8" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/></svg>
+          No lock-in contracts
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TRUST STRIP ───────────────────────────────────────── -->
+  <div class="trust-strip">
+    <div class="trust-inner">
+      <p class="trust-label">Built for South West businesses</p>
+      <div class="trust-grid">
+        <div class="trust-item">Cafes & Restaurants</div>
+        <div class="trust-item">Tourism Operators</div>
+        <div class="trust-item">Wineries & Breweries</div>
+        <div class="trust-item">Accommodation</div>
+        <div class="trust-item">Trade Services</div>
+        <div class="trust-item">Retail & Wellness</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SERVICES GRID ──────────────────────────────────────────── -->
+  <section id="services" style="padding:80px 24px;border-top:1px solid var(--border);">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="fade" style="text-align:center;margin-bottom:56px;">
+        <div style="display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:5px;margin-bottom:16px;border:1px solid var(--accent-border);color:var(--accent);background:var(--accent-dim);text-transform:uppercase;letter-spacing:0.05em;">What we do</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-0.025em;margin-bottom:12px;">Our AI-Powered <em style="font-family:'IBM Plex Serif',serif;font-style:italic;">Marketing Services</em></h2>
+        <p style="font-size:16px;color:var(--fg-2);max-width:520px;margin:0 auto;line-height:1.65;">Everything your business needs to get found, chosen, and remembered — done for you every month.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;" class="fade">
+
+        <!-- Social Media -->
+        <a href="services/social-media.html" class="svc-card" style="border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;">
+          <div style="height:180px;position:relative;overflow:hidden;background:linear-gradient(135deg,#0d1f2d 0%,#1a3a4a 40%,#0d3d3a 100%);">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(46,207,184,0.25),transparent 60%);"></div>
+            <!-- Grid of "post" squares -->
+            <div style="position:absolute;bottom:16px;right:16px;display:grid;grid-template-columns:repeat(3,52px);gap:4px;">
+              <div style="height:52px;border-radius:6px;background:linear-gradient(135deg,rgba(46,207,184,0.3),rgba(46,207,184,0.1));border:1px solid rgba(46,207,184,0.2);"></div>
+              <div style="height:52px;border-radius:6px;background:linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03));border:1px solid rgba(255,255,255,0.08);"></div>
+              <div style="height:52px;border-radius:6px;background:linear-gradient(135deg,rgba(167,139,250,0.2),rgba(107,70,193,0.1));border:1px solid rgba(167,139,250,0.15);"></div>
+              <div style="height:52px;border-radius:6px;background:linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02));border:1px solid rgba(255,255,255,0.06);"></div>
+              <div style="height:52px;border-radius:6px;background:linear-gradient(135deg,rgba(46,207,184,0.2),rgba(46,207,184,0.05));border:1px solid rgba(46,207,184,0.15);"></div>
+              <div style="height:52px;border-radius:6px;background:linear-gradient(135deg,rgba(255,200,100,0.15),rgba(245,158,11,0.05));border:1px solid rgba(245,158,11,0.12);"></div>
+            </div>
+            <div style="position:absolute;top:20px;left:20px;">
+              <div style="font-size:28px;">📸</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500;letter-spacing:0.04em;">SOCIAL MEDIA</div>
+            </div>
+            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--surface));"></div>
+          </div>
+          <div style="padding:22px 24px 24px;">
+            <h3 style="font-size:17px;font-weight:700;margin-bottom:8px;">Social Media Content</h3>
+            <p style="font-size:14px;color:var(--fg-2);line-height:1.65;margin-bottom:18px;">Posts, Reels, and captions scheduled every week. Consistent content that builds your following and brings in new customers — without you lifting a finger.</p>
+            <span style="font-size:13px;font-weight:500;color:var(--accent);">Learn more →</span>
+          </div>
+        </a>
+
+        <!-- Google Business -->
+        <a href="services/google-business.html" class="svc-card" style="border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;">
+          <div style="height:180px;position:relative;overflow:hidden;background:linear-gradient(135deg,#0a1f10 0%,#0d2a18 50%,#0f3520 100%);">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(111,207,151,0.2),transparent 60%);"></div>
+            <!-- Map pin + stars -->
+            <div style="position:absolute;top:20px;right:20px;display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+              <div style="background:rgba(111,207,151,0.15);border:1px solid rgba(111,207,151,0.25);border-radius:8px;padding:6px 10px;font-size:11px;color:#6fcf97;font-weight:600;">★★★★★ 4.9</div>
+              <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:6px 10px;font-size:11px;color:rgba(255,255,255,0.4);">127 reviews</div>
+            </div>
+            <div style="position:absolute;top:20px;left:20px;">
+              <div style="font-size:28px;">📍</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500;letter-spacing:0.04em;">GOOGLE PROFILE</div>
+            </div>
+            <div style="position:absolute;bottom:16px;left:20px;right:20px;">
+              <div style="height:6px;border-radius:100px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                <div style="height:100%;width:94%;background:linear-gradient(90deg,#6fcf97,rgba(111,207,151,0.4));border-radius:100px;"></div>
+              </div>
+              <div style="font-size:11px;color:rgba(111,207,151,0.7);margin-top:5px;">Profile completeness: 94%</div>
+            </div>
+            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--surface));"></div>
+          </div>
+          <div style="padding:22px 24px 24px;">
+            <h3 style="font-size:17px;font-weight:700;margin-bottom:8px;">Google Business Profile</h3>
+            <p style="font-size:14px;color:var(--fg-2);line-height:1.65;margin-bottom:18px;">We optimise your profile so locals find you first. Full setup, weekly posts, review management, and "near me" ranking — all handled.</p>
+            <span style="font-size:13px;font-weight:500;color:#6fcf97;">Learn more →</span>
+          </div>
+        </a>
+
+        <!-- Copywriting -->
+        <a href="services/website-copywriting.html" class="svc-card" style="border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;">
+          <div style="height:180px;position:relative;overflow:hidden;background:linear-gradient(135deg,#14102a 0%,#1e1040 50%,#160f35 100%);">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(167,139,250,0.18),transparent 65%);"></div>
+            <!-- Before/after text lines -->
+            <div style="position:absolute;top:16px;right:16px;width:160px;display:flex;flex-direction:column;gap:6px;">
+              <div style="padding:6px 10px;border-radius:6px;background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.15);">
+                <div style="height:5px;border-radius:3px;background:rgba(248,113,113,0.3);margin-bottom:4px;"></div>
+                <div style="height:5px;border-radius:3px;background:rgba(248,113,113,0.2);width:70%;"></div>
+              </div>
+              <div style="padding:6px 10px;border-radius:6px;background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.2);">
+                <div style="height:5px;border-radius:3px;background:rgba(167,139,250,0.5);margin-bottom:4px;"></div>
+                <div style="height:5px;border-radius:3px;background:rgba(167,139,250,0.35);width:85%;margin-bottom:4px;"></div>
+                <div style="height:5px;border-radius:3px;background:rgba(167,139,250,0.25);width:60%;"></div>
+              </div>
+            </div>
+            <div style="position:absolute;top:20px;left:20px;">
+              <div style="font-size:28px;">✍️</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500;letter-spacing:0.04em;">COPYWRITING</div>
+            </div>
+            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--surface));"></div>
+          </div>
+          <div style="padding:22px 24px 24px;">
+            <h3 style="font-size:17px;font-weight:700;margin-bottom:8px;">Website Copywriting</h3>
+            <p style="font-size:14px;color:var(--fg-2);line-height:1.65;margin-bottom:18px;">Clear, persuasive copy that turns website visitors into customers. Every word rewritten to work for you.</p>
+            <span style="font-size:13px;font-weight:500;color:#a78bfa;">Learn more →</span>
+          </div>
+        </a>
+
+        <!-- AI Lead Response -->
+        <a href="services/ai-lead-response.html" class="svc-card" style="border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;">
+          <div style="height:180px;position:relative;overflow:hidden;background:linear-gradient(135deg,#1f1500 0%,#2a1e00 50%,#1f1800 100%);">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 50%,rgba(251,191,36,0.18),transparent 60%);"></div>
+            <!-- Chat bubbles -->
+            <div style="position:absolute;top:16px;right:16px;display:flex;flex-direction:column;gap:6px;width:170px;">
+              <div style="align-self:flex-start;padding:6px 10px;border-radius:10px;border-bottom-left-radius:2px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);font-size:10px;color:rgba(255,255,255,0.5);">Do you have availability?</div>
+              <div style="align-self:flex-end;padding:6px 10px;border-radius:10px;border-bottom-right-radius:2px;background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.2);font-size:10px;color:rgba(251,191,36,0.8);">Yes! We have spots Sat & Sun ⚡</div>
+              <div style="font-size:10px;color:rgba(251,191,36,0.5);text-align:right;">Replied in 8 seconds</div>
+            </div>
+            <div style="position:absolute;top:20px;left:20px;">
+              <div style="font-size:28px;">⚡</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500;letter-spacing:0.04em;">AI LEAD RESPONSE</div>
+            </div>
+            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--surface));"></div>
+          </div>
+          <div style="padding:22px 24px 24px;">
+            <h3 style="font-size:17px;font-weight:700;margin-bottom:8px;">AI Lead Response</h3>
+            <p style="font-size:14px;color:var(--fg-2);line-height:1.65;margin-bottom:18px;">Never miss a warm lead again. Our AI responds to enquiries 24/7 across Instagram, Facebook, and Google — instantly.</p>
+            <span style="font-size:13px;font-weight:500;color:#fbbf24;">Learn more →</span>
+          </div>
+        </a>
+
+        <!-- CRM & Automation -->
+        <a href="services/crm-automation.html" class="svc-card" style="border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;">
+          <div style="height:180px;position:relative;overflow:hidden;background:linear-gradient(135deg,#1f0a0a 0%,#2d1010 50%,#200808 100%);">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(248,113,113,0.15),transparent 60%);"></div>
+            <!-- Flow diagram dots -->
+            <div style="position:absolute;top:50%;right:20px;transform:translateY(-50%);display:flex;align-items:center;gap:6px;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(248,113,113,0.2);border:1px solid rgba(248,113,113,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;">📩</div>
+              <div style="width:20px;height:1px;background:rgba(248,113,113,0.3);"></div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;">🔔</div>
+              <div style="width:20px;height:1px;background:rgba(111,207,151,0.3);"></div>
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(111,207,151,0.15);border:1px solid rgba(111,207,151,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;">✅</div>
+            </div>
+            <div style="position:absolute;bottom:16px;right:20px;font-size:11px;color:rgba(248,113,113,0.6);">GoHighLevel powered</div>
+            <div style="position:absolute;top:20px;left:20px;">
+              <div style="font-size:28px;">🔁</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500;letter-spacing:0.04em;">CRM & AUTOMATION</div>
+            </div>
+            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--surface));"></div>
+          </div>
+          <div style="padding:22px 24px 24px;">
+            <h3 style="font-size:17px;font-weight:700;margin-bottom:8px;">CRM & Automation</h3>
+            <p style="font-size:14px;color:var(--fg-2);line-height:1.65;margin-bottom:18px;">GoHighLevel setup that automates your follow-ups, reminders, and re-engagement — so no lead ever goes cold.</p>
+            <span style="font-size:13px;font-weight:500;color:#f87171;">Learn more →</span>
+          </div>
+        </a>
+
+        <!-- Email Marketing -->
+        <a href="services/email-marketing.html" class="svc-card" style="border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;">
+          <div style="height:180px;position:relative;overflow:hidden;background:linear-gradient(135deg,#071a18 0%,#0e2e2a 50%,#0a2422 100%);">
+            <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 60%,rgba(46,207,184,0.15),transparent 60%);"></div>
+            <!-- Email mockup lines -->
+            <div style="position:absolute;top:20px;right:16px;width:165px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px;">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                <div style="width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#7efff5);flex-shrink:0;"></div>
+                <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.2);flex:1;"></div>
+              </div>
+              <div style="height:5px;border-radius:3px;background:rgba(46,207,184,0.4);margin-bottom:5px;"></div>
+              <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.1);width:80%;margin-bottom:5px;"></div>
+              <div style="height:5px;border-radius:3px;background:rgba(255,255,255,0.07);width:60%;margin-bottom:8px;"></div>
+              <div style="background:rgba(46,207,184,0.15);border:1px solid rgba(46,207,184,0.2);border-radius:4px;padding:3px 8px;font-size:9px;color:rgba(46,207,184,0.8);display:inline-block;">Book now →</div>
+            </div>
+            <div style="position:absolute;top:20px;left:20px;">
+              <div style="font-size:28px;">📧</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-top:6px;font-weight:500;letter-spacing:0.04em;">EMAIL MARKETING</div>
+            </div>
+            <div style="position:absolute;bottom:16px;left:20px;font-size:11px;color:rgba(46,207,184,0.5);">38% open rate avg</div>
+            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(transparent,var(--surface));"></div>
+          </div>
+          <div style="padding:22px 24px 24px;">
+            <h3 style="font-size:17px;font-weight:700;margin-bottom:8px;">Email Marketing</h3>
+            <p style="font-size:14px;color:var(--fg-2);line-height:1.65;margin-bottom:18px;">Monthly newsletters written and sent for you. Keep past customers coming back with seasonal offers and updates.</p>
+            <span style="font-size:13px;font-weight:500;color:var(--accent);">Learn more →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WE DO IT FOR YOU ─────────────────────────────────────── -->
+  <section style="padding:80px 24px;border-top:1px solid var(--border);">
+    <div style="max-width:1100px;margin:0 auto;display:grid;gap:64px;align-items:center;" class="two-col-stack fade">
+      <div>
+        <div style="display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:5px;margin-bottom:20px;border:1px solid var(--accent-border);color:var(--accent);background:var(--accent-dim);text-transform:uppercase;letter-spacing:0.05em;">How it works</div>
+        <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:700;letter-spacing:-0.025em;line-height:1.15;margin-bottom:16px;">We don't hand you tools.<br/><em style="font-family:'IBM Plex Serif',serif;font-style:italic;">We get you results.</em></h2>
+        <p style="font-size:15px;color:var(--fg-2);line-height:1.7;margin-bottom:16px;">Most "AI marketing" solutions give you access to a dashboard and wish you luck. We take the opposite approach — you focus on running your business, we handle everything else.</p>
+        <p style="font-size:15px;color:var(--fg-2);line-height:1.7;margin-bottom:32px;">Our AI does the heavy lifting on content production, and we apply the strategy, local knowledge, and human judgement to make it actually work for <em>your</em> business.</p>
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div class="step-row">
+            <div class="step-num">1</div>
+            <div><div style="font-size:14px;font-weight:600;margin-bottom:3px;">Free online audit</div><div style="font-size:13px;color:var(--fg-2);line-height:1.6;">We review your Google, Instagram, and website — and show you exactly what's costing you customers right now.</div></div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">2</div>
+            <div><div style="font-size:14px;font-weight:600;margin-bottom:3px;">We build your content system</div><div style="font-size:13px;color:var(--fg-2);line-height:1.6;">Content calendar, brand voice guide, scheduled posts, and profile setup — all done in week one.</div></div>
+          </div>
+          <div class="step-row">
+            <div class="step-num">3</div>
+            <div><div style="font-size:14px;font-weight:600;margin-bottom:3px;">You see results, we report them</div><div style="font-size:13px;color:var(--fg-2);line-height:1.6;">Monthly report in plain English — reach, calls, enquiries, growth. No jargon, just numbers that matter.</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:0 8px 40px -8px rgba(0,0,0,0.6);">
+          <div style="display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface-subtle);">
+            <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#febc2e;"></div>
+            <div style="width:10px;height:10px;border-radius:50%;background:#28c840;"></div>
+            <span style="font-size:12px;color:var(--fg-3);margin-left:8px;">Coastal Content Co · Your Content Pipeline</span>
+          </div>
+          <div style="padding:20px;display:flex;flex-direction:column;gap:10px;">
+            <div style="font-size:11px;color:var(--fg-3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">This week — auto-scheduled for your business</div>
+            <div style="border:1px solid var(--accent-border);border-radius:10px;padding:12px;background:var(--accent-dim);display:flex;gap:12px;align-items:center;">
+              <div style="font-size:18px;">📸</div>
+              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">Mon — Instagram post</div><div style="font-size:12px;color:var(--fg-3);">Caption written · Hashtags optimised · Scheduled 7am</div></div>
+              <div style="font-size:11px;font-weight:600;color:var(--accent);background:rgba(46,207,184,0.15);padding:2px 8px;border-radius:4px;white-space:nowrap;">Live</div>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface-subtle);display:flex;gap:12px;align-items:center;">
+              <div style="font-size:18px;">🎬</div>
+              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">Wed — Instagram Reel</div><div style="font-size:12px;color:var(--fg-3);">Script written · Hook optimised · Auto-scheduled</div></div>
+              <div style="font-size:11px;font-weight:600;color:#fbbf24;background:rgba(251,191,36,0.12);padding:2px 8px;border-radius:4px;white-space:nowrap;">Ready</div>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface-subtle);display:flex;gap:12px;align-items:center;">
+              <div style="font-size:18px;">📍</div>
+              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">Thu — Google post</div><div style="font-size:12px;color:var(--fg-3);">Weekly update · Offer highlighted · CTA added</div></div>
+              <div style="font-size:11px;font-weight:600;color:#fbbf24;background:rgba(251,191,36,0.12);padding:2px 8px;border-radius:4px;white-space:nowrap;">Ready</div>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface-subtle);display:flex;gap:12px;align-items:center;">
+              <div style="font-size:18px;">⚡</div>
+              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">AI Lead Response — active 24/7</div><div style="font-size:12px;color:var(--fg-3);">3 DMs replied · 1 booking confirmed today</div></div>
+              <div style="font-size:11px;font-weight:600;color:#6fcf97;background:rgba(111,207,151,0.12);padding:2px 8px;border-radius:4px;white-space:nowrap;">Active</div>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface-subtle);display:flex;gap:12px;align-items:center;">
+              <div style="font-size:18px;">📧</div>
+              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">Fri — Email newsletter</div><div style="font-size:12px;color:var(--fg-3);">Monthly send · 340 subscribers · Draft ready</div></div>
+              <div style="font-size:11px;font-weight:600;color:var(--fg-3);background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:4px;white-space:nowrap;">Draft</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- (old feature sections placeholder) -->
+  <div style="display:none;" id="old-features-start">
+    <div class="features">
+      <div class="rail">
+
+      <!-- Feature 1: Social Media -->
+      <div class="feature-section fade">
+        <div class="feature-text">
+          <div class="feature-tag">Social Media Content</div>
+          <h2>Posts, Reels, captions —<br/><em>done for you every week.</em></h2>
+          <p>AI-fast, human-approved content that actually sounds like your business. We create and schedule everything so your Instagram is always active, even when you're slammed.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>3–7 posts per week, scheduled in advance</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Instagram Reels built for discovery and saves</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Captions written in your brand voice</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Seasonal content for events, specials, and launches</span>
+            </div>
+          </div>
+          <a href="#contact" class="learn-more">Get started <span>→</span></a>
+        </div>
+        <div class="feature-visual">
+          <div class="visual-card">
+            <div class="visual-topbar">
+              <div class="vdot" style="background:#ff5f57;"></div>
+              <div class="vdot" style="background:#febc2e;"></div>
+              <div class="vdot" style="background:#28c840;"></div>
+              <span style="font-size:12px;color:var(--fg-3);margin-left:8px;">@your_business · Instagram</span>
+            </div>
+            <div class="visual-body">
+              <div class="ig-post">
+                <div class="ig-header">
+                  <div class="ig-avatar"></div>
+                  <div>
+                    <div class="ig-name">yourbusiness.sw</div>
+                    <div class="ig-handle">Busselton, WA</div>
+                  </div>
+                  <div style="margin-left:auto;font-size:20px;color:var(--fg-3);">···</div>
+                </div>
+                <div class="ig-image" style="background:linear-gradient(135deg,#0d3d3a,#1a4a3d);">
+                  <span>📸 Morning special content</span>
+                </div>
+                <div class="ig-caption">
+                  <span style="font-weight:600;color:var(--fg);">yourbusiness.sw</span> Start your week right ☀️ Our house-made granola bowls are back on the menu — made fresh every morning before 7am. Come in before 9 and grab a coffee for $4. <span style="color:var(--accent);">#Busselton #CoffeeBusselton #SouthWestWA</span>
+                </div>
+                <div class="ig-stats">
+                  <span>❤️ 142 likes</span>
+                  <span>💬 8 comments</span>
+                  <span>🔖 34 saves</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;">
+                <div style="flex:1;border:1px solid var(--border);border-radius:8px;height:80px;background:linear-gradient(135deg,#1a2d1a,#0d1f0d);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--fg-3);">Next post →</div>
+                <div style="flex:1;border:1px solid var(--border);border-radius:8px;height:80px;background:linear-gradient(135deg,#1a1a2d,#0d0d1f);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--fg-3);">Reel draft</div>
+                <div style="flex:1;border:1px solid var(--border);border-radius:8px;height:80px;background:linear-gradient(135deg,#2d1a1a,#1f0d0d);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--fg-3);">Story</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: Google -->
+      <div class="feature-section reverse fade">
+        <div class="feature-text">
+          <div class="feature-tag">Google Business Profile</div>
+          <h2>Show up when locals<br/><em>search for you.</em></h2>
+          <p>Most local businesses have an incomplete or outdated Google profile — which means they're invisible to the customers actively searching for them right now. We fix that.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Full profile setup and optimisation</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Review response management (every review, replied to)</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Weekly posts and fresh photo updates</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Rank higher in local "near me" searches</span>
+            </div>
+          </div>
+          <a href="#contact" class="learn-more">Get started <span>→</span></a>
+        </div>
+        <div class="feature-visual">
+          <div class="visual-card">
+            <div class="visual-topbar">
+              <div class="vdot" style="background:#ff5f57;"></div>
+              <div class="vdot" style="background:#febc2e;"></div>
+              <div class="vdot" style="background:#28c840;"></div>
+              <span style="font-size:12px;color:var(--fg-3);margin-left:8px;">Google Business Profile</span>
+            </div>
+            <div class="visual-body">
+              <div class="gp-card">
+                <div class="gp-name">Your Business Name</div>
+                <div class="gp-cat">Cafe · Busselton WA · Open now</div>
+                <div class="gp-stars">★★★★★ <span class="gp-rating">4.8 (127 reviews)</span></div>
+                <div class="gp-stat"><span>Profile completeness</span><span>94%</span></div>
+                <div class="gp-stat"><span>Monthly views</span><span>+340%</span></div>
+                <div class="gp-stat"><span>Calls from search</span><span>↑ 48 this month</span></div>
+                <div class="gp-stat"><span>Direction requests</span><span>↑ 83 this month</span></div>
+              </div>
+              <div style="margin-top:12px;border:1px solid var(--border);border-radius:8px;padding:12px;">
+                <div style="font-size:11px;color:var(--fg-3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;">Latest review responded</div>
+                <div style="font-size:12px;color:var(--fg-2);line-height:1.5;">"Amazing coffee and such a friendly team! Will be back every week."</div>
+                <div style="margin-top:8px;font-size:11px;padding:8px 10px;border-radius:6px;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--fg-2);line-height:1.5;">
+                  <span style="color:var(--accent);font-weight:600;">Owner replied:</span> Thank you so much! We love seeing familiar faces — see you next week ☀️
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: Copywriting -->
+      <div class="feature-section fade">
+        <div class="feature-text">
+          <div class="feature-tag">Website Copywriting</div>
+          <h2>Words that make people<br/><em>pick up the phone.</em></h2>
+          <p>Your website is your hardest-working employee. If the copy isn't clear, specific, and persuasive, visitors leave. We write and refresh your pages so every visitor knows exactly why they should choose you.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Homepage, about, and service page rewrites</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>SEO-friendly, local-focused copy</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Clear calls to action on every page</span>
+            </div>
+          </div>
+          <a href="#contact" class="learn-more">Get started <span>→</span></a>
+        </div>
+        <div class="feature-visual">
+          <div class="visual-card">
+            <div class="visual-topbar">
+              <div class="vdot" style="background:#ff5f57;"></div>
+              <div class="vdot" style="background:#febc2e;"></div>
+              <div class="vdot" style="background:#28c840;"></div>
+              <span style="font-size:12px;color:var(--fg-3);margin-left:8px;">homepage.html · Editing</span>
+            </div>
+            <div class="visual-body">
+              <div style="border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:12px;">
+                <div style="font-size:10px;color:var(--fg-3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Before</div>
+                <div style="font-size:13px;line-height:1.6;text-decoration:line-through;color:var(--fg-3);">Welcome to our website. We are a local business located in Busselton WA. We offer a range of services. Please contact us for more information.</div>
+              </div>
+              <div style="border:1px solid var(--accent-border);border-radius:8px;padding:14px;background:var(--accent-dim);">
+                <div style="font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">After</div>
+                <div style="font-size:13px;line-height:1.6;color:var(--fg-2);">Busselton's go-to plumber for fast, reliable residential and commercial work. No call-out fee. Same-day service available. <span style="color:var(--accent);font-weight:600;">Call now →</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 4: Packages -->
+      <div class="feature-section reverse fade">
+        <div class="feature-text">
+          <div class="feature-tag">Monthly Marketing Packages</div>
+          <h2>Everything bundled.<br/><em>Nothing missed.</em></h2>
+          <p>From $500/month. No lock-in contracts. We earn your business every month by delivering results — not by trapping you in a 12-month contract.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Social + Google + email newsletters in one package</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Monthly performance reports</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Starter from $500/month · Growth from $1,200/month</span>
+            </div>
+            <div class="check-item">
+              <div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div>
+              <span>Cancel anytime — no lock-in</span>
+            </div>
+          </div>
+          <a href="#contact" class="learn-more">See packages <span>→</span></a>
+        </div>
+        <div class="feature-visual">
+          <div class="visual-card">
+            <div class="visual-topbar">
+              <div class="vdot" style="background:#ff5f57;"></div>
+              <div class="vdot" style="background:#febc2e;"></div>
+              <div class="vdot" style="background:#28c840;"></div>
+              <span style="font-size:12px;color:var(--fg-3);margin-left:8px;">Monthly report · March 2025</span>
+            </div>
+            <div class="visual-body">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+                <div style="border:1px solid var(--border);border-radius:8px;padding:12px;">
+                  <div style="font-size:11px;color:var(--fg-3);margin-bottom:6px;">Instagram reach</div>
+                  <div style="font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--fg);">4,812</div>
+                  <div style="font-size:11px;color:#6fcf97;">↑ +38% vs last month</div>
+                </div>
+                <div style="border:1px solid var(--border);border-radius:8px;padding:12px;">
+                  <div style="font-size:11px;color:var(--fg-3);margin-bottom:6px;">Google views</div>
+                  <div style="font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--fg);">2,140</div>
+                  <div style="font-size:11px;color:#6fcf97;">↑ +62% vs last month</div>
+                </div>
+                <div style="border:1px solid var(--border);border-radius:8px;padding:12px;">
+                  <div style="font-size:11px;color:var(--fg-3);margin-bottom:6px;">Calls generated</div>
+                  <div style="font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--fg);">48</div>
+                  <div style="font-size:11px;color:#6fcf97;">↑ new leads this month</div>
+                </div>
+                <div style="border:1px solid var(--accent-border);border-radius:8px;padding:12px;background:var(--accent-dim);">
+                  <div style="font-size:11px;color:var(--accent);margin-bottom:6px;">Posts published</div>
+                  <div style="font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--fg);">24</div>
+                  <div style="font-size:11px;color:var(--accent);">On schedule ✓</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div><!-- /old-features-start hidden -->
+
+  <!-- ─── WHY US ──────────────────────────────────────────────── -->
+  <section class="stats-section" id="why-us">
+    <div class="stats-inner">
+      <div class="fade">
+        <h2 class="stats-heading">Why Coastal Content Co</h2>
+        <p class="stats-sub">We're not a Perth agency with a South West mailing address. We live here.</p>
+      </div>
+
+      <!-- Differentiator cards -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:48px;" class="fade">
+        <div style="border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--surface);">
+          <div style="width:36px;height:36px;border-radius:8px;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+            <svg width="16" height="16" fill="none" stroke="#2ECFB8" stroke-width="2" stroke-linecap="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Genuinely local</h4>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">We live in Busselton/Dunsborough. We know the businesses, the seasons, the events. Your content will sound like it's from someone who actually gets the South West.</p>
+        </div>
+        <div style="border:1px solid var(--accent-border);border-radius:12px;padding:24px;background:var(--accent-dim);">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(46,207,184,0.2);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+            <svg width="16" height="16" fill="none" stroke="#2ECFB8" stroke-width="2" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;color:var(--accent);">AI-powered output</h4>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Other agencies teach you AI in a morning workshop. We use AI to deliver you better content, faster, at a fraction of what others charge. It's our production engine — not a product we sell.</p>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--surface);">
+          <div style="width:36px;height:36px;border-radius:8px;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+            <svg width="16" height="16" fill="none" stroke="#2ECFB8" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="12" height="10" rx="2"/><path d="M8 13v3M5 16h6"/></svg>
+          </div>
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Transparent pricing</h4>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Every competitor hides their prices and makes you book a call. We show you exactly what you get and what it costs — right here on this page.</p>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:12px;padding:24px;background:var(--surface);">
+          <div style="width:36px;height:36px;border-radius:8px;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+            <svg width="16" height="16" fill="none" stroke="#2ECFB8" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Results you can measure</h4>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">No vague "brand storytelling." We track follower growth, reach, Google calls, and enquiries — and report it to you every month in plain English.</p>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="stats-grid fade">
+        <div class="stat-cell">
+          <div class="stat-num">83<span style="font-size:0.6em;font-weight:600;color:var(--fg-2);">%</span></div>
+          <div class="stat-label">of SMEs have no digital marketing strategy in place</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">11<span style="font-size:0.6em;font-weight:600;color:var(--fg-2);">%</span></div>
+          <div class="stat-label">less AI use in regional areas — less competition for your attention</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">5<span style="font-size:0.6em;font-weight:600;color:var(--fg-2);">×</span></div>
+          <div class="stat-label">more likely to be discovered with an active Google + social presence</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num" style="color:var(--accent);">$500</div>
+          <div class="stat-label">to start — most clients earn this back in their first week of new enquiries</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── COMPARISON ─────────────────────────────────────────────── -->
+  <section style="padding:80px 24px;border-top:1px solid var(--border);">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="fade" style="text-align:center;margin-bottom:48px;">
+        <h2 style="font-size:clamp(26px,4vw,40px);font-weight:700;letter-spacing:-0.025em;margin-bottom:10px;">Coastal Content Co vs <em style="font-family:'IBM Plex Serif',serif;font-style:italic;">Your Other Options</em></h2>
+        <p style="font-size:15px;color:var(--fg-2);max-width:480px;margin:0 auto;line-height:1.65;">Most businesses either overpay a city agency or struggle to DIY. We built a third option.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;" class="fade comp-grid">
+
+        <!-- DIY -->
+        <div style="background:var(--surface);padding:28px;">
+          <div style="font-size:24px;margin-bottom:12px;">😓</div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:6px;">Doing It Yourself</div>
+          <div style="display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:100px;background:rgba(239,68,68,0.15);color:#f87171;margin-bottom:16px;">TIME DRAIN</div>
+          <p style="font-size:13px;color:var(--fg-3);margin-bottom:20px;line-height:1.6;">Spending evenings trying to figure out what to post, never consistent, no real strategy behind it.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>Posts once a week when you remember</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>No local SEO strategy</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>Miss enquiries after hours</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>Costs you hours every week</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>No reporting or improvement</div>
+          </div>
+        </div>
+
+        <!-- Perth Agency -->
+        <div style="background:var(--surface);padding:28px;">
+          <div style="font-size:24px;margin-bottom:12px;">🏙️</div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:6px;">Perth Agency</div>
+          <div style="display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:100px;background:rgba(245,158,11,0.15);color:#fbbf24;margin-bottom:16px;">EXPENSIVE</div>
+          <p style="font-size:13px;color:var(--fg-3);margin-bottom:20px;line-height:1.6;">They don't know Busselton from Bunbury. Generic content, locked contracts, and $3–5k/month minimum.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>No local knowledge or context</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>$3,000–$5,000+/month minimum</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>6–12 month lock-in contracts</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>Junior staff manage your account</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>Hides pricing until you book a call</div>
+          </div>
+        </div>
+
+        <!-- Coastal Content Co -->
+        <div style="background:var(--accent-dim);padding:28px;border-left:1px solid var(--accent-border);">
+          <div style="font-size:24px;margin-bottom:12px;">🌊</div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:6px;color:var(--accent);">Coastal Content Co</div>
+          <div style="display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:100px;background:rgba(46,207,184,0.2);color:var(--accent);margin-bottom:16px;">BEST VALUE</div>
+          <p style="font-size:13px;color:var(--fg-2);margin-bottom:20px;line-height:1.6;">Local expert + AI production = big-agency results at a fraction of the cost. Month-to-month. No surprises.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>Based in Busselton/Dunsborough</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>From $500/month — transparent pricing</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>No lock-in — cancel anytime</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>AI-powered speed, human strategy</div>
+            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>Monthly reporting in plain English</div>
+          </div>
+        </div>
+
+      </div>
+      <div style="text-align:center;margin-top:32px;" class="fade">
+        <a href="#contact" class="btn-primary">Get your free audit →</a>
+        <p style="font-size:13px;color:var(--fg-3);margin-top:12px;">No commitment. We show you what's missing and what it would take to fix it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRICING ───────────────────────────────────────────────── -->
+  <section id="pricing" style="border-top:1px solid var(--border);padding:80px 24px;">
+    <div style="max-width:1000px;margin:0 auto;">
+      <div class="fade" style="text-align:center;margin-bottom:48px;">
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-0.025em;margin-bottom:10px;">Simple, transparent pricing</h2>
+        <p style="font-size:15px;color:var(--fg-2);">No hidden fees. No lock-in contracts. Cancel anytime.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;" class="fade">
+
+        <!-- Starter -->
+        <div style="border:1px solid var(--border);border-radius:14px;padding:28px;background:var(--surface);">
+          <div style="font-size:12px;font-weight:600;color:var(--fg-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Starter</div>
+          <div style="font-size:42px;font-weight:800;letter-spacing:-0.04em;margin-bottom:4px;">$500<span style="font-size:16px;font-weight:500;color:var(--fg-2);">/month</span></div>
+          <p style="font-size:13px;color:var(--fg-2);margin-bottom:24px;line-height:1.6;">Perfect for cafes, tradies, and small businesses just getting started online.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">3–5 Instagram posts per week</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Google Business Profile management</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Review responses</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Monthly performance report</span></div>
+          </div>
+          <a href="#contact" class="btn-ghost" style="width:100%;justify-content:center;padding:11px;">Get started →</a>
+        </div>
+
+        <!-- Growth — highlighted -->
+        <div style="border:1px solid var(--accent-border);border-radius:14px;padding:28px;background:var(--accent-dim);position:relative;">
+          <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--accent);color:#080E1C;font-size:11px;font-weight:700;padding:3px 12px;border-radius:100px;white-space:nowrap;">Most popular</div>
+          <div style="font-size:12px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Growth</div>
+          <div style="font-size:42px;font-weight:800;letter-spacing:-0.04em;margin-bottom:4px;">$1,200<span style="font-size:16px;font-weight:500;color:var(--fg-2);">/month</span></div>
+          <p style="font-size:13px;color:var(--fg-2);margin-bottom:24px;line-height:1.6;">For tourism operators, restaurants, and wineries who want a serious online presence.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Daily content + Instagram Reels</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Google Business Profile — full management</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Monthly email newsletter</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Website copy refresh (quarterly)</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Monthly performance report + strategy call</span></div>
+          </div>
+          <a href="#contact" class="btn-primary" style="width:100%;justify-content:center;padding:11px;">Get started →</a>
+        </div>
+
+        <!-- Custom -->
+        <div style="border:1px solid var(--border);border-radius:14px;padding:28px;background:var(--surface);">
+          <div style="font-size:12px;font-weight:600;color:var(--fg-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Custom</div>
+          <div style="font-size:42px;font-weight:800;letter-spacing:-0.04em;margin-bottom:4px;">Let's <em style="font-family:'IBM Plex Serif',serif;font-style:italic;color:var(--accent);">talk</em></div>
+          <p style="font-size:13px;color:var(--fg-2);margin-bottom:24px;line-height:1.6;">Multiple locations, large hospitality groups, or something specific in mind? We'll build a package around you.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Everything in Growth</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Multi-platform (Facebook, TikTok, LinkedIn)</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Full website copywriting</span></div>
+            <div class="check-item"><div class="check-icon"><svg width="10" height="10" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M2 5l2.5 2.5 5-5"/></svg></div><span style="font-size:13px;color:var(--fg-2);">Priority turnaround</span></div>
+          </div>
+          <a href="#contact" class="btn-ghost" style="width:100%;justify-content:center;padding:11px;">Talk to us →</a>
+        </div>
+
+      </div>
+      <p style="text-align:center;font-size:13px;color:var(--fg-3);margin-top:20px;">All packages are month-to-month. No setup fees. No lock-in. Start with a free audit.</p>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ──────────────────────────────────────── -->
+  <section class="testimonials" id="testimonials">
+    <h2 class="testimonials-heading fade">What clients say</h2>
+    <p class="testimonials-sub fade">South West businesses getting results.</p>
+    <div class="marquee-wrapper">
+      <div class="marquee-track">
+        <!-- Set 1 -->
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(46,207,184,0.15);color:#2ECFB8;">SC</div>
+            <div><div class="tcard-name">Sarah C.</div><div class="tcard-handle">Cafe owner · Busselton</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Our Instagram went from 2 posts a month to daily content. Within 6 weeks people were coming in saying they found us online — never happened before."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(107,70,193,0.2);color:#a78bfa;">MR</div>
+            <div><div class="tcard-name">Mike R.</div><div class="tcard-handle">Plumber · Dunsborough</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Our Google profile was basically invisible. They fixed it in a week and we're showing up in the top 3 for 'plumber Busselton'. The phone rings more."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(245,158,11,0.15);color:#fbbf24;">JL</div>
+            <div><div class="tcard-name">Jo L.</div><div class="tcard-handle">Tour operator · Dunsborough</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Best investment I've made this year. The content looks professional, it's consistent, and it actually sounds like us. Bookings are up 30% this quarter."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(239,68,68,0.15);color:#f87171;">AB</div>
+            <div><div class="tcard-name">Amanda B.</div><div class="tcard-handle">Winery · Margaret River</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"The Reels he created for cellar door visits went viral locally. We had 40+ new visitors that weekend who mentioned seeing us on Instagram. Incredible ROI."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(46,207,184,0.12);color:#2ECFB8;">TK</div>
+            <div><div class="tcard-name">Tom K.</div><div class="tcard-handle">Builder · Busselton</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Never thought social media was for tradies until this. Now I get 3–4 enquiries a month just from Google. Well worth the $500."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(134,197,63,0.15);color:#86c53f;">KP</div>
+            <div><div class="tcard-name">Karen P.</div><div class="tcard-handle">Accommodation · Dunsborough</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Our Airbnb listing used to sit empty in off-season. The social strategy they built us keeps bookings coming in year-round. Game changer."</div>
+        </div>
+        <!-- Set 2 (duplicate for infinite scroll) -->
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(46,207,184,0.15);color:#2ECFB8;">SC</div>
+            <div><div class="tcard-name">Sarah C.</div><div class="tcard-handle">Cafe owner · Busselton</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Our Instagram went from 2 posts a month to daily content. Within 6 weeks people were coming in saying they found us online — never happened before."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(107,70,193,0.2);color:#a78bfa;">MR</div>
+            <div><div class="tcard-name">Mike R.</div><div class="tcard-handle">Plumber · Dunsborough</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Our Google profile was basically invisible. They fixed it in a week and we're showing up in the top 3 for 'plumber Busselton'. The phone rings more."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(245,158,11,0.15);color:#fbbf24;">JL</div>
+            <div><div class="tcard-name">Jo L.</div><div class="tcard-handle">Tour operator · Dunsborough</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Best investment I've made this year. The content looks professional, it's consistent, and it actually sounds like us. Bookings are up 30% this quarter."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(239,68,68,0.15);color:#f87171;">AB</div>
+            <div><div class="tcard-name">Amanda B.</div><div class="tcard-handle">Winery · Margaret River</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"The Reels he created for cellar door visits went viral locally. We had 40+ new visitors that weekend who mentioned seeing us on Instagram. Incredible ROI."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(46,207,184,0.12);color:#2ECFB8;">TK</div>
+            <div><div class="tcard-name">Tom K.</div><div class="tcard-handle">Builder · Busselton</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Never thought social media was for tradies until this. Now I get 3–4 enquiries a month just from Google. Well worth the $500."</div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-header">
+            <div class="tcard-avatar" style="background:rgba(134,197,63,0.15);color:#86c53f;">KP</div>
+            <div><div class="tcard-name">Karen P.</div><div class="tcard-handle">Accommodation · Dunsborough</div></div>
+          </div>
+          <div class="tcard-stars">★★★★★</div>
+          <div class="tcard-text">"Our Airbnb listing used to sit empty in off-season. The social strategy they built us keeps bookings coming in year-round. Game changer."</div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--fg-3);margin-top:24px;padding:0 24px;">* Testimonials are illustrative placeholders — to be replaced with real client quotes once onboarded</p>
+  </section>
+
+  <!-- ─── CTA / CONTACT ──────────────────────────────────────── -->
+  <section class="cta-section" id="contact">
+    <div class="fade">
+      <h2>Ready to get <em>found?</em></h2>
+      <p>Start with a free audit of your online presence. Honest, specific, and no strings attached.</p>
+      <div class="form-wrap">
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-grid">
+            <input class="form-field" type="text" placeholder="Your name" required />
+            <input class="form-field" type="text" placeholder="Business name" required />
+            <input class="form-field form-field-full" type="email" placeholder="Email address" required />
+            <input class="form-field form-field-full" type="tel" placeholder="Phone number (optional)" />
+            <textarea class="form-field form-field-full" rows="4" placeholder="Tell us about your business and what you need..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:13px;" id="submit-btn">
+            Send — get my free audit →
+          </button>
+        </form>
+        <p style="font-size:13px;color:var(--fg-3);margin-top:16px;">Or email directly at <span style="color:var(--fg-2);">hello@coastalcontentco.com.au</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="logo" style="font-size:16px;">coastal<span>content</span><em>co</em></a>
+          <p>AI-powered content and marketing for local South West businesses. Busselton & Dunsborough, WA.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#services">Social Media Content</a>
+          <a href="#services">Google Profile Management</a>
+          <a href="#services">Website Copywriting</a>
+          <a href="#services">AI Lead Response</a>
+          <a href="#services">CRM & Automation</a>
+          <a href="#services">Email Marketing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#why-us">Why Us</a>
+          <a href="#testimonials">Client Results</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Area</h4>
+          <a href="#">Busselton</a>
+          <a href="#">Dunsborough</a>
+          <a href="#">Margaret River Region</a>
+          <a href="#">South West WA</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">hello@coastalcontentco.com.au</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 The Coastal Content Co · Busselton, WA</span>
+        <span>All systems go · Packages from $500/month</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    menuBtn.addEventListener('click', () => mobileNav.classList.toggle('open'));
+    function closeMobileNav() { mobileNav.classList.remove('open'); }
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      btn.textContent = '✓ Sent! We\'ll be in touch within 24 hours.';
+      btn.style.background = '#1BBFAA';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coastal Content Co — Full Strategic Roadmap</title>
+  <style>
+    :root {
+      --bg: #13111c;
+      --surface: #1b192c;
+      --surface-2: #201e30;
+      --border: #2d2b3a;
+      --fg: #f7f7f8;
+      --fg-2: #8a8897;
+      --fg-3: #55536a;
+      --accent: #2ECFB8;
+      --accent-dim: rgba(46,207,184,0.1);
+      --accent-border: rgba(46,207,184,0.25);
+      --green: #6fcf97;
+      --green-dim: rgba(111,207,151,0.12);
+      --amber: #fbbf24;
+      --amber-dim: rgba(251,191,36,0.12);
+      --red: #f87171;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(19,17,28,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; gap: 8px;
+      height: 52px; overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-logo { font-size: 13px; font-weight: 700; color: var(--fg); white-space: nowrap; margin-right: 16px; }
+    .nav-logo span { color: var(--accent); }
+    nav a {
+      font-size: 12px; color: var(--fg-3); text-decoration: none;
+      white-space: nowrap; padding: 5px 10px; border-radius: 6px;
+      transition: color 0.2s, background 0.2s;
+    }
+    nav a:hover { color: var(--fg-2); background: var(--surface); }
+
+    /* LAYOUT */
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+    /* HEADER */
+    header {
+      padding: 72px 32px 64px;
+      text-align: center;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(46,207,184,0.08), transparent 60%);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, var(--fg-3) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.12;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+    }
+    .header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--accent); background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 24px;
+    }
+    header h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800; letter-spacing: -0.035em; line-height: 1.05;
+      margin-bottom: 16px;
+    }
+    header h1 span { color: var(--accent); }
+    header p {
+      font-size: 16px; color: var(--fg-2); max-width: 560px;
+      margin: 0 auto 32px; line-height: 1.65;
+    }
+    .header-meta {
+      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+      font-size: 13px; color: var(--fg-3);
+    }
+    .header-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* SECTION */
+    section { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    section:last-child { border-bottom: none; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    h2 {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 700; letter-spacing: -0.025em; margin-bottom: 12px;
+    }
+    .section-sub { font-size: 15px; color: var(--fg-2); margin-bottom: 36px; line-height: 1.65; max-width: 620px; }
+
+    /* CARDS */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .card-accent { border-color: var(--accent-border); background: var(--accent-dim); }
+    .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .card p { font-size: 14px; color: var(--fg-2); line-height: 1.65; }
+
+    /* GRID */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; margin: 24px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead th {
+      text-align: left; font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--fg-3); padding: 10px 16px;
+      border-bottom: 1px solid var(--border); white-space: nowrap;
+    }
+    tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--fg-2); font-size: 14px; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: var(--surface-2); }
+    td.fg { color: var(--fg); font-weight: 600; }
+    td.accent { color: var(--accent); font-weight: 700; }
+    td.green { color: var(--green); }
+    td.amber { color: var(--amber); }
+
+    /* PHASE TIMELINE */
+    .phase {
+      display: grid; grid-template-columns: 80px 1fr; gap: 24px;
+      margin-bottom: 40px; position: relative;
+    }
+    .phase:not(:last-child)::before {
+      content: '';
+      position: absolute; left: 39px; top: 52px; bottom: -40px; width: 1px;
+      background: var(--border);
+    }
+    .phase-num {
+      width: 80px; height: 80px; border-radius: 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .phase-num .num { font-size: 22px; font-weight: 800; color: var(--accent); line-height: 1; }
+    .phase-num .months { font-size: 10px; color: var(--fg-3); margin-top: 3px; text-align: center; }
+    .phase-content { padding-top: 8px; }
+    .phase-content h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .phase-content .phase-tag {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 2px 10px; border-radius: 4px; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .phase-tag-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(111,207,151,0.25); }
+    .phase-tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(251,191,36,0.25); }
+    .phase-tag-accent { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-border); }
+
+    /* CHECKLIST */
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .checklist li {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 14px; color: var(--fg-2); line-height: 1.55;
+    }
+    .check {
+      width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+    }
+    .check svg { display: block; }
+
+    /* SERVICE CARD */
+    .service-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 22px;
+    }
+    .service-num {
+      font-size: 11px; font-weight: 700; color: var(--fg-3);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+    }
+    .service-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .service-card .price { font-size: 18px; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
+    .service-card p { font-size: 13px; color: var(--fg-2); line-height: 1.6; margin-bottom: 12px; }
+    .tool-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tool-pill {
+      font-size: 11px; padding: 3px 9px; border-radius: 5px;
+      background: var(--surface-2); border: 1px solid var(--border);
+      color: var(--fg-3);
+    }
+
+    /* PRICING */
+    .pricing-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px; position: relative;
+    }
+    .pricing-card.featured { border-color: var(--accent-border); background: var(--accent-dim); }
+    .pricing-badge {
+      position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #080E1C;
+      font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 100px;
+      white-space: nowrap;
+    }
+    .pricing-tier { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; color: var(--fg-3); }
+    .pricing-card.featured .pricing-tier { color: var(--accent); }
+    .pricing-amount { font-size: 40px; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 4px; }
+    .pricing-amount span { font-size: 15px; font-weight: 500; color: var(--fg-2); }
+    .pricing-desc { font-size: 13px; color: var(--fg-2); margin-bottom: 20px; line-height: 1.6; }
+
+    /* PROSPECT */
+    .prospect-row {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .prospect-row:last-child { border-bottom: none; }
+    .prospect-num {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--accent);
+    }
+    .prospect-name { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+    .prospect-why { font-size: 13px; color: var(--fg-2); line-height: 1.5; }
+
+    /* STATUS BADGE */
+    .badge {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 2px 9px; border-radius: 4px;
+    }
+    .badge-done { background: var(--green-dim); color: var(--green); border: 1px solid rgba(111,207,151,0.25); }
+    .badge-pending { background: var(--surface-2); color: var(--fg-3); border: 1px solid var(--border); }
+
+    /* STAT */
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 24px 0; }
+    .stat-cell { background: var(--bg); padding: 28px 20px; text-align: center; }
+    .stat-num { font-size: 40px; font-weight: 800; letter-spacing: -0.04em; margin-bottom: 6px; }
+    .stat-label { font-size: 12px; color: var(--fg-2); line-height: 1.5; }
+
+    /* COMPARE TABLE */
+    .compare-yes { color: var(--green); font-weight: 600; }
+    .compare-no { color: var(--red); font-weight: 600; }
+    .compare-us { color: var(--accent); font-weight: 600; }
+
+    /* TOOLS TABLE */
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+    .tool-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+    .tool-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .tool-purpose { font-size: 12px; color: var(--fg-2); margin-bottom: 6px; }
+    .tool-cost { font-size: 12px; color: var(--accent); font-weight: 600; }
+
+    /* REVENUE */
+    .revenue-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; }
+    @media(max-width:640px) { .revenue-row { grid-template-columns: 1fr 1fr; } }
+
+    /* PRINT */
+    @media print {
+      nav { display: none; }
+      section { break-inside: avoid; }
+    }
+
+    @media(max-width: 640px) {
+      .wrap { padding: 0 20px; }
+      header { padding: 48px 20px 40px; }
+      .phase { grid-template-columns: 1fr; }
+      .phase-num { width: 56px; height: 56px; }
+      .phase:not(:last-child)::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">coastal<span>content</span>co</div>
+    <a href="#opportunity">Opportunity</a>
+    <a href="#positioning">Positioning</a>
+    <a href="#phases">Phases</a>
+    <a href="#services">Services</a>
+    <a href="#tools">Tools</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#prospects">Prospects</a>
+    <a href="#outreach">Outreach</a>
+    <a href="#milestones">Milestones</a>
+    <a href="#revenue">Revenue</a>
+    <a href="#advantages">Advantages</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <div class="header-badge">Full Strategic Roadmap · March 2026</div>
+  <h1>The Coastal Content Co<br/><span>Strategy Document</span></h1>
+  <p>AI-powered content and marketing agency — Busselton & Dunsborough, WA. Everything you need to go from zero to first client and beyond.</p>
+  <div class="header-meta">
+    <span>📍 Busselton / Dunsborough, WA</span>
+    <span>🎯 First client: April 2026</span>
+    <span>💰 Target: $8K+/month by Month 6</span>
+    <span>👤 V Fernando</span>
+  </div>
+</header>
+
+<!-- OPPORTUNITY -->
+<section id="opportunity">
+  <div class="wrap">
+    <div class="section-label">The Opportunity</div>
+    <h2>The gap is real — and it's right here</h2>
+    <p class="section-sub">The South West WA corridor is booming. Tourism, hospitality, trades, accommodation, wineries — all thriving. But almost none of them have a working digital marketing strategy.</p>
+
+    <div class="stat-grid">
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--accent);">83%</div>
+        <div class="stat-label">of SMEs have no digital marketing strategy in place</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--accent);">11%</div>
+        <div class="stat-label">less AI use in regional areas vs cities — less competition for attention</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--accent);">5×</div>
+        <div class="stat-label">more likely to be discovered with active Google + social presence</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" style="color:var(--accent);">$0</div>
+        <div class="stat-label">what most local businesses spend on professional content marketing</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:16px;">
+      <div class="card">
+        <h3>The existing competition is weak</h3>
+        <p>Redhead Digital is Perth-based with a South West mailing address. Their blog hasn't been updated since 2021. They hide pricing, use vague messaging, and have only 3 testimonials after 8 years. Dunsborough Marketing Co is similarly thin. Neither is content-first or genuinely local.</p>
+      </div>
+      <div class="card card-accent">
+        <h3>The window is open right now</h3>
+        <p>Regional AI adoption is 11% lower than cities — meaning the businesses that need this most haven't been approached yet. A genuinely local, AI-powered, transparently priced content agency doesn't exist in this region. That's you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSITIONING -->
+<section id="positioning">
+  <div class="wrap">
+    <div class="section-label">Competitive Positioning</div>
+    <h2>How we win</h2>
+    <p class="section-sub">Core positioning: <em style="color:var(--fg);font-style:normal;font-weight:600;">"Content that gets South West businesses found online — by someone who actually lives here."</em></p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>Redhead Digital</th>
+            <th style="color:var(--accent);">Coastal Content Co</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="fg">Location</td><td>Perth CBD (secondary SW presence)</td><td class="compare-us">Based in Busselton/Dunsborough</td></tr>
+          <tr><td class="fg">Focus</td><td>Generalist digital agency</td><td class="compare-us">Content-first agency</td></tr>
+          <tr><td class="fg">AI use</td><td>Teaches AI in workshops</td><td class="compare-us">Uses AI to produce output</td></tr>
+          <tr><td class="fg">Pricing</td><td class="compare-no">Hidden — requires a call</td><td class="compare-us">Publicly listed from $500/month</td></tr>
+          <tr><td class="fg">Social proof</td><td class="compare-no">3 vague testimonials, no metrics</td><td class="compare-us">Results-first from day one</td></tr>
+          <tr><td class="fg">Blog/content</td><td class="compare-no">Stale — last posts 2021–2022</td><td class="compare-us">Fresh, local, weekly</td></tr>
+          <tr><td class="fg">Contracts</td><td>Unknown</td><td class="compare-us">Month-to-month, cancel anytime</td></tr>
+          <tr><td class="fg">Audience focus</td><td>Small biz + NFPs + Board directors</td><td class="compare-us">South West SMEs only</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid-2" style="margin-top:8px;">
+      <div class="card">
+        <h3>🧠 AI as a deliverable, not a classroom</h3>
+        <p>Competitors teach AI. We use AI to produce faster, better, more affordable content. It's our production engine — not a workshop we sell separately.</p>
+      </div>
+      <div class="card">
+        <h3>📍 Hyper-local = unfair advantage</h3>
+        <p>You know the businesses, the seasons, the events. Your content sounds like it comes from someone who actually gets the South West — because it does.</p>
+      </div>
+      <div class="card">
+        <h3>💰 Transparent pricing wins trust</h3>
+        <p>We're the only agency in the region showing prices publicly. Small business owners do late-night research before they call anyone. Show them the number.</p>
+      </div>
+      <div class="card">
+        <h3>📊 Concrete results, not philosophy</h3>
+        <p>No "brand storytelling" or "impactful digital strategies." We track follower growth, Google calls, reach, and bookings — and report it every month in plain English.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section id="phases">
+  <div class="wrap">
+    <div class="section-label">Business Phases</div>
+    <h2>The roadmap from zero to scale</h2>
+    <p class="section-sub">Built on the principle: do one thing well, get proof, then expand. Don't launch 8 services at once.</p>
+
+    <div style="margin-top:8px;">
+
+      <div class="phase">
+        <div class="phase-num"><div class="num">1</div><div class="months">Months 1–2</div></div>
+        <div class="phase-content">
+          <div class="phase-tag phase-tag-green">Foundation</div>
+          <h3>Set up and land first client</h3>
+          <p style="font-size:14px;color:var(--fg-2);margin-bottom:16px;">Before selling anything, get the foundations right. Then focus on closing one paying client.</p>
+          <ul class="checklist">
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Register ABN (sole trader to start, Pty Ltd when revenue justifies)</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Open dedicated business bank account</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Get professional liability / PI insurance (~$500–$1,500/yr)</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Website live at coastalcontentco.com.au</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Complete prospect research (50 businesses across 5 batches)</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Begin outreach to top 15 prospects (email + Instagram DM)</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Close first paid client at $500–$800/month</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Deliver first month of content — get first real testimonial with metrics</li>
+          </ul>
+          <div style="margin-top:16px;padding:14px;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--fg-2);">
+            💡 <strong style="color:var(--fg);">Free pilot strategy:</strong> Offer one business a free 30-day trial. "I'll manage your Instagram and Google profile for free. If it works, you pay $500/month. If not, we shake hands." Get proof, get a testimonial, convert to paid.
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-num"><div class="num">2</div><div class="months">Months 2–4</div></div>
+        <div class="phase-content">
+          <div class="phase-tag phase-tag-amber">Proof of Concept</div>
+          <h3>2–3 paying clients + first case study</h3>
+          <p style="font-size:14px;color:var(--fg-2);margin-bottom:16px;">Turn the free pilot into a paying client, then sign 1–2 more. Build your first real case study with actual numbers.</p>
+          <ul class="checklist">
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>2–3 paying clients at Starter tier</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>First case study with hard numbers (followers gained, reach, calls generated)</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Replace placeholder testimonials on website with real ones</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Finalise pricing (undercut competitors — research complete)</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Begin word-of-mouth referral loop — ask every happy client for one referral</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-num"><div class="num">3</div><div class="months">Months 4–8</div></div>
+        <div class="phase-content">
+          <div class="phase-tag phase-tag-accent">Stack Services</div>
+          <h3>Add services in order — don't rush</h3>
+          <p style="font-size:14px;color:var(--fg-2);margin-bottom:16px;">Once you have 3–5 stable paying clients, add services one at a time. Each new service upsells to existing clients first.</p>
+          <div class="grid-2" style="margin-bottom:0;">
+            <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Add first: AI Lead Response</div>
+              <div style="font-size:13px;color:var(--fg-2);">Connect their Facebook/Instagram/WhatsApp to auto-respond to leads 24/7. Fastest ROI proof. Upsell to existing clients at $600–$1,200/month add-on.</div>
+            </div>
+            <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Add second: Email Marketing</div>
+              <div style="font-size:13px;color:var(--fg-2);">Monthly newsletters for hospitality and tourism clients. Low extra effort once content workflow is running. Add $300–$500/month to existing packages.</div>
+            </div>
+            <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Add third: SEO Content</div>
+              <div style="font-size:13px;color:var(--fg-2);">Blog posts and website copy optimised for local search. "Best cafe Busselton", "whale watching Dunsborough" etc. $500–$1,500/month add-on.</div>
+            </div>
+            <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;">
+              <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Add fourth: AI Sales Outreach (B2B)</div>
+              <div style="font-size:13px;color:var(--fg-2);">Apollo.io + cold email automation for B2B clients (accountants, IT, consultants). Different audience, higher ticket. $2,000–$4,000/month.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-num"><div class="num">4</div><div class="months">Month 8+</div></div>
+        <div class="phase-content">
+          <div class="phase-tag phase-tag-green">Scale</div>
+          <h3>Systems, team, and $10K+ MRR</h3>
+          <p style="font-size:14px;color:var(--fg-2);margin-bottom:16px;">Once you're at $10K+/month, stop doing everything yourself.</p>
+          <ul class="checklist">
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Hire a VA (Philippines-based: ~$600–$800/month) for content production and scheduling</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Build free lead magnets (e.g. "South West Business Social Media Audit" tool)</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Start publishing on LinkedIn and YouTube as "AI Marketing Expert in WA"</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Expand client base across all of WA (not just South West)</li>
+            <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>White-label platform resell opportunity (GoHighLevel SaaS stream)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-label">Services</div>
+    <h2>What we sell — and in what order</h2>
+    <p class="section-sub">Launch one service first. Get proof. Then add the next. Listed in recommended launch order.</p>
+
+    <div class="grid-2">
+
+      <div class="service-card" style="border-color:var(--accent-border);background:var(--accent-dim);">
+        <div class="service-num">Launch first</div>
+        <h3>Social Media Content</h3>
+        <div class="price">From $500/month</div>
+        <p>Posts, Reels, captions, scheduling — done for you every week. This is your core service and easiest to sell. Every local business needs it and most have nothing.</p>
+        <div class="tool-list">
+          <span class="tool-pill">ChatGPT</span>
+          <span class="tool-pill">Canva</span>
+          <span class="tool-pill">Buffer / Later</span>
+          <span class="tool-pill">CapCut</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">Launch with it</div>
+        <h3>Google Business Profile</h3>
+        <div class="price">Bundled in Starter</div>
+        <p>Setup, optimisation, review responses, weekly posts, photo updates. Most local businesses have incomplete profiles — easy fix, immediate impact.</p>
+        <div class="tool-list">
+          <span class="tool-pill">Google Business</span>
+          <span class="tool-pill">ChatGPT</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">Add at Month 2–3</div>
+        <h3>AI Lead Response</h3>
+        <div class="price">$600–$1,200/month add-on</div>
+        <p>Auto-respond to every Facebook, Instagram, and WhatsApp lead within seconds — 24/7, even when the owner is busy or sleeping. Fastest ROI proof for clients.</p>
+        <div class="tool-list">
+          <span class="tool-pill">GoHighLevel</span>
+          <span class="tool-pill">ManyChat</span>
+          <span class="tool-pill">Zapier</span>
+          <span class="tool-pill">ChatGPT API</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">Add at Month 3–4</div>
+        <h3>Email Newsletter</h3>
+        <div class="price">$300–$500/month add-on</div>
+        <p>Monthly email to their customer list. Specials, events, news, seasonal offers. Especially powerful for hospitality, tourism, and accommodation clients.</p>
+        <div class="tool-list">
+          <span class="tool-pill">Mailchimp / Klaviyo</span>
+          <span class="tool-pill">ChatGPT</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">Add at Month 4–5</div>
+        <h3>Website Copywriting</h3>
+        <div class="price">$500–$1,500 per project</div>
+        <p>Rewrite homepage, about, and service pages so visitors understand exactly what the business does and why to choose them. Project-based or quarterly.</p>
+        <div class="tool-list">
+          <span class="tool-pill">ChatGPT</span>
+          <span class="tool-pill">Surfer SEO</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-num">Add at Month 5–6</div>
+        <h3>Local SEO Content</h3>
+        <div class="price">$500–$1,500/month add-on</div>
+        <p>Blog posts optimised for local search terms — "best cafe Busselton", "whale watching Dunsborough". Drives organic Google traffic over time.</p>
+        <div class="tool-list">
+          <span class="tool-pill">Ahrefs / Semrush</span>
+          <span class="tool-pill">Surfer SEO</span>
+          <span class="tool-pill">ChatGPT</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+  <div class="wrap">
+    <div class="section-label">Core Tools</div>
+    <h2>The AI production stack</h2>
+    <p class="section-sub">These tools are what make it possible to deliver agency-quality work at half the price. Learn them in this order.</p>
+
+    <div class="tools-grid">
+      <div class="tool-card" style="border-color:var(--accent-border);">
+        <div class="tool-name">ChatGPT / Claude</div>
+        <div class="tool-purpose">Content writing, captions, email copy, strategies</div>
+        <div class="tool-cost">$20–$30/month</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Canva Pro</div>
+        <div class="tool-purpose">Graphics, post templates, Reels covers, branding</div>
+        <div class="tool-cost">~$20/month</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Buffer or Later</div>
+        <div class="tool-purpose">Schedule and publish content across accounts</div>
+        <div class="tool-cost">$15–$40/month</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">CapCut</div>
+        <div class="tool-purpose">Reels editing, captions, transitions</div>
+        <div class="tool-cost">Free / $15/month</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">GoHighLevel</div>
+        <div class="tool-purpose">CRM, AI chat, lead automation, email — all-in-one</div>
+        <div class="tool-cost">$97–$297/month</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">ManyChat</div>
+        <div class="tool-purpose">WhatsApp / Instagram / Facebook auto-responses</div>
+        <div class="tool-cost">$15–$169/month</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Zapier / Make.com</div>
+        <div class="tool-purpose">Connect tools and automate workflows</div>
+        <div class="tool-cost">Free–$29/month</div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-name">Surfer SEO</div>
+        <div class="tool-purpose">Optimise blog content for Google ranking</div>
+        <div class="tool-cost">$89/month</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:14px;color:var(--fg-2);">
+      💡 <strong style="color:var(--fg);">Start lean:</strong> For Month 1, you only need ChatGPT + Canva + Buffer. Total cost ~$55/month. Add GoHighLevel when you add the AI Lead Response service. Don't pay for tools before you need them.
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-label">Pricing</div>
+    <h2>Simple, transparent packages</h2>
+    <p class="section-sub">No hidden fees. No lock-in. No discovery calls required to find out the price. This is the biggest advantage over every competitor in the region.</p>
+
+    <div class="grid-3" style="margin-bottom:16px;">
+
+      <div class="pricing-card">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-amount">$500<span>/month</span></div>
+        <div class="pricing-desc">Perfect for cafes, tradies, and small businesses just getting started online.</div>
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>3–5 Instagram posts per week</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Google Business Profile management</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Review responses</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Monthly performance report</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Most popular</div>
+        <div class="pricing-tier">Growth</div>
+        <div class="pricing-amount">$1,200<span>/month</span></div>
+        <div class="pricing-desc">For tourism operators, restaurants, and wineries who want a serious online presence.</div>
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Daily content + Instagram Reels</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Google Business Profile — full management</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Monthly email newsletter</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Website copy refresh (quarterly)</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Monthly report + strategy call</li>
+        </ul>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-tier">Custom</div>
+        <div class="pricing-amount" style="font-size:28px;padding-top:6px;">Let's talk</div>
+        <div class="pricing-desc">Multiple locations, larger groups, or something specific. We build a package around you.</div>
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Everything in Growth</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Multi-platform (Facebook, TikTok, LinkedIn)</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Full website copywriting</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Priority turnaround</li>
+        </ul>
+      </div>
+
+    </div>
+    <p style="font-size:13px;color:var(--fg-3);text-align:center;">All packages are month-to-month · No setup fees · No lock-in · Cancel anytime</p>
+  </div>
+</section>
+
+<!-- PROSPECTS -->
+<section id="prospects">
+  <div class="wrap">
+    <div class="section-label">Prospect Research</div>
+    <h2>50 businesses — 5 batches of 10</h2>
+    <p class="section-sub">Research is done light-pass first (qualification only). Full audit only when a prospect responds and requests a report.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Batch</th><th>Category</th><th>Status</th><th>Top Prospects</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="fg">Batch 1</td>
+            <td>Restaurants & Cafes</td>
+            <td><span class="badge badge-done">✅ Complete</span></td>
+            <td style="color:var(--fg-2);">rise&co, Brimful of Asha, Artezen, Occy's, Bistro Breton</td>
+          </tr>
+          <tr>
+            <td class="fg">Batch 2</td>
+            <td>Tourism Operators</td>
+            <td><span class="badge badge-done">✅ Complete</span></td>
+            <td style="color:var(--fg-2);">SW Eco Discoveries, Legend Charters, All Sea Charters, Epic Marine, MR Brewery Tours</td>
+          </tr>
+          <tr>
+            <td class="fg">Batch 3</td>
+            <td>Wineries & Breweries</td>
+            <td><span class="badge badge-done">✅ Complete</span></td>
+            <td style="color:var(--fg-2);">Wise Wine, Happs Wines, Whicher Ridge, Eagle Bay Brewing, Beerfarm</td>
+          </tr>
+          <tr>
+            <td class="fg">Batch 4</td>
+            <td>Accommodation</td>
+            <td><span class="badge badge-pending">🔲 Pending</span></td>
+            <td style="color:var(--fg-3);">—</td>
+          </tr>
+          <tr>
+            <td class="fg">Batch 5</td>
+            <td>Trades, Retail & Wellness</td>
+            <td><span class="badge badge-pending">🔲 Pending</span></td>
+            <td style="color:var(--fg-3);">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:700;margin:32px 0 16px;">Top 15 priority outreach targets (from completed batches)</h3>
+
+    <div class="grid-2">
+      <div class="card">
+        <div style="font-size:12px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Cafes & Restaurants</div>
+        <div class="prospect-row"><div class="prospect-num">1</div><div><div class="prospect-name">rise&co Craft Bakery</div><div class="prospect-why">Zero Reels in 11 years — premium product, huge gap</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">2</div><div><div class="prospect-name">Brimful of Asha</div><div class="prospect-why">TripAdvisor Travellers' Choice winner, only 213 Instagram followers</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">3</div><div><div class="prospect-name">Artezen</div><div class="prospect-why">New ownership June 2025 — blank slate, 2,300 existing followers</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">4</div><div><div class="prospect-name">Occy's Dunsborough</div><div class="prospect-why">Broken website, craft beer + food = content goldmine</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">5</div><div><div class="prospect-name">Bistro Breton</div><div class="prospect-why">French origin story — proven viral content category</div></div></div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:12px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Tourism Operators</div>
+        <div class="prospect-row"><div class="prospect-num">6</div><div><div class="prospect-name">SW Eco Discoveries</div><div class="prospect-why">#1 rated Dunsborough tour, 5.0/600 reviews, barely any Reels</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">7</div><div><div class="prospect-name">Legend Charters</div><div class="prospect-why">20+ years operating, only ~500 Instagram followers, no Reels</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">8</div><div><div class="prospect-name">All Sea Charters</div><div class="prospect-why">Films whales from metres away — no Reels strategy</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">9</div><div><div class="prospect-name">Epic Marine Charters</div><div class="prospect-why">New operator, 4 five-star reviews, ~300 followers — get in early</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">10</div><div><div class="prospect-name">MR Brewery Tours</div><div class="prospect-why">Following more accounts than follow them — no Reels, 5.0 rating</div></div></div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:12px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Wineries & Breweries</div>
+        <div class="prospect-row"><div class="prospect-num">11</div><div><div class="prospect-name">Wise Wine</div><div class="prospect-why">Ocean views, premium product — only 72 total posts ever</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">12</div><div><div class="prospect-name">Happs Wines</div><div class="prospect-why">Unique 39-wine self-serve tasting, 4.8 rating, 3,094 followers</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">13</div><div><div class="prospect-name">Whicher Ridge Wines</div><div class="prospect-why">Perfect 5.0 Google rating — barely any social presence</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">14</div><div><div class="prospect-name">Eagle Bay Brewing Co</div><div class="prospect-why">21K followers but inconsistent posting — stunning setting unused</div></div></div>
+        <div class="prospect-row"><div class="prospect-num">15</div><div><div class="prospect-name">Beerfarm</div><div class="prospect-why">Local handle 1,477 followers vs parent brand's 43K — clear gap</div></div></div>
+      </div>
+
+      <div class="card" style="background:var(--surface-2);">
+        <div style="font-size:12px;color:var(--fg-3);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Light Pass Checklist — What to Look For</div>
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Last Instagram post older than 2 weeks</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>No Reels at all</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>No Google Business Profile or incomplete</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>No review responses</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Under 500 followers despite being established</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Facebook active but Instagram dead (or vice versa)</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>No email visible anywhere online</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>No link in bio or broken link</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTREACH -->
+<section id="outreach">
+  <div class="wrap">
+    <div class="section-label">Outreach Strategy</div>
+    <h2>Email + Instagram DM</h2>
+    <p class="section-sub">Two channels, one goal — get a reply. The close happens in the conversation, not the message.</p>
+
+    <div class="grid-2" style="margin-bottom:24px;">
+      <div class="card">
+        <h3>📧 Cold Email — formal pitch</h3>
+        <p style="margin-bottom:14px;">Reference one specific gap. One genuine observation. Clear free offer. No pressure.</p>
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;color:var(--fg-2);line-height:1.7;">
+          <strong style="color:var(--fg);">Subject:</strong> Quick question about [Business Name]'s Instagram<br/><br/>
+          Hi [Name],<br/><br/>
+          I'm V Fernando — I live locally in [Busselton/Dunsborough] and run a small content and marketing service for businesses in the area.<br/><br/>
+          I noticed [SPECIFIC GAP — e.g. "your last Instagram post was 6 weeks ago" / "your Google profile has no photos"].<br/><br/>
+          Happy to share a few free ideas for [Business Name] — no strings attached.<br/><br/>
+          Worth a quick chat?<br/><br/>
+          V Fernando
+        </div>
+      </div>
+      <div class="card">
+        <h3>📱 Instagram DM — warm approach</h3>
+        <p style="margin-bottom:14px;">Short and casual. Goal is a reply only — not a close. Compliment + specific gap + free offer.</p>
+        <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:14px;font-size:13px;color:var(--fg-2);line-height:1.7;">
+          Hey [Name]! Love what you're doing at [Business Name] — [GENUINE COMPLIMENT].<br/><br/>
+          I help local businesses with social content and I noticed [SPECIFIC GAP — e.g. "you haven't posted in a few weeks"].<br/><br/>
+          I've got a couple of quick ideas — would you be open to a chat? Totally free, no pressure. 🤙
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="background:var(--surface-2);">
+      <h3 style="margin-bottom:14px;">✅ Personalisation checklist — before every send</h3>
+      <div class="grid-2">
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Their actual name (check website, Instagram bio, Facebook)</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>One specific observation about their online presence</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Correct business name spelling</li>
+        </ul>
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Busselton OR Dunsborough — right location</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>One genuine compliment (DMs only)</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Sign off as V Fernando — not a company name</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MILESTONES -->
+<section id="milestones">
+  <div class="wrap">
+    <div class="section-label">Milestones</div>
+    <h2>Month by month targets</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Month 1 — April 2026</div>
+        <h3 style="margin-bottom:14px;">First Client</h3>
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Complete Batches 4 & 5</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Outreach to top 15 prospects</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Close first paid client at $500–$800/month</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Deliver first month of content</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Get first real testimonial with metrics</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div style="font-size:11px;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Month 2 — May 2026</div>
+        <h3 style="margin-bottom:14px;">Proof of Concept</h3>
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>2–3 paying clients</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>First real case study with hard numbers</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Replace placeholder testimonials on website</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Word-of-mouth referral loop begins</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div style="font-size:11px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Month 3 — June 2026</div>
+        <h3 style="margin-bottom:14px;">Systems</h3>
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>5 clients = $3,000–4,000/month recurring</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>AI content production workflow fully systemised</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Onboarding process documented</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>First blog post published (local SEO)</li>
+        </ul>
+      </div>
+      <div class="card card-accent">
+        <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Month 6+ Target</div>
+        <h3 style="margin-bottom:14px;">Scale</h3>
+        <ul class="checklist">
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>8–10 clients, $5K–8K+/month recurring</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>VA hired for content production</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>Established local reputation</li>
+          <li><div class="check"><svg width="9" height="9" fill="none" stroke="#2ECFB8" stroke-width="2.5" stroke-linecap="round"><path d="M1.5 4.5l2 2 4-4"/></svg></div>AI Lead Response added as upsell service</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section id="revenue">
+  <div class="wrap">
+    <div class="section-label">Revenue Model</div>
+    <h2>The numbers</h2>
+    <p class="section-sub">Conservative trajectory. Solo operation. No staff until Month 8+.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Month</th><th>Clients</th><th>Avg MRR/Client</th><th>Total MRR</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1–2</td><td>0–1 (free pilot → paid)</td><td>$0 → $500</td><td class="amber">$0 → $500</td></tr>
+          <tr><td>3</td><td>2 paid</td><td>$800</td><td class="amber">$1,600</td></tr>
+          <tr><td>4–5</td><td>4 paid</td><td>$1,000</td><td class="amber">$4,000</td></tr>
+          <tr><td>6–7</td><td>7 paid</td><td>$1,200</td><td class="green">$8,400</td></tr>
+          <tr><td>8–10</td><td>10 paid</td><td>$1,500</td><td class="green">$15,000</td></tr>
+          <tr><td>12+</td><td>15+ paid</td><td>$2,000+</td><td class="accent">$30,000+</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:20px;" class="grid-3">
+      <div class="card">
+        <h3 style="font-size:13px;color:var(--fg-3);font-weight:600;margin-bottom:6px;">5 Starter clients</h3>
+        <div style="font-size:28px;font-weight:800;color:var(--fg);">$2,500<span style="font-size:14px;color:var(--fg-2);">/mo</span></div>
+        <p>5 × $500 Starter package</p>
+      </div>
+      <div class="card card-accent">
+        <h3 style="font-size:13px;color:var(--accent);font-weight:600;margin-bottom:6px;">Mixed 9-client stack</h3>
+        <div style="font-size:28px;font-weight:800;color:var(--fg);">$8,100<span style="font-size:14px;color:var(--fg-2);">/mo</span></div>
+        <p>5 Starter + 3 Growth + 1 Custom</p>
+      </div>
+      <div class="card">
+        <h3 style="font-size:13px;color:var(--fg-3);font-weight:600;margin-bottom:6px;">With upsells (add-ons)</h3>
+        <div style="font-size:28px;font-weight:800;color:var(--green);">$12,000+<span style="font-size:14px;color:var(--fg-2);">/mo</span></div>
+        <p>AI lead response + email add-ons on top</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section id="advantages">
+  <div class="wrap">
+    <div class="section-label">Unfair Advantages</div>
+    <h2>Why you win</h2>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>📍 You actually live there</h3>
+        <p>Not a Perth agency with a South West mailing address. You can walk into their shop, have a coffee with them, build real trust. Regional businesses want someone local they can call.</p>
+      </div>
+      <div class="card">
+        <h3>🤖 AI production speed</h3>
+        <p>You deliver more content, faster, and cheaper than any human-only agency. The AI does the heavy lifting — you do the local knowledge and quality control.</p>
+      </div>
+      <div class="card">
+        <h3>💰 Transparent pricing</h3>
+        <p>The only agency in the region showing prices publicly. This removes friction and signals confidence. Competitors make you book a call just to find out what they charge.</p>
+      </div>
+      <div class="card">
+        <h3>🎯 Content-first, not generalist</h3>
+        <p>Every competitor is a generalist doing content on the side. You own the word. When someone searches "content marketing agency South West WA" — that should be you.</p>
+      </div>
+      <div class="card">
+        <h3>👀 Fresh eyes</h3>
+        <p>You can see gaps that business owners have become blind to. A bakery that's never posted a Reel. A winery with 72 total posts. You see the opportunity immediately.</p>
+      </div>
+      <div class="card card-accent">
+        <h3>⏰ The window is open right now</h3>
+        <p>Regional AI adoption is 11% lower than cities. The businesses that need this most haven't been approached yet. First-mover advantage is real — and it closes as the market catches up.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;padding:28px;background:var(--surface);border:1px solid var(--accent-border);border-radius:14px;text-align:center;">
+      <div style="font-size:13px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">Next action</div>
+      <div style="font-size:22px;font-weight:700;margin-bottom:8px;">Complete Batches 4 & 5 → Start outreach to top 15 prospects</div>
+      <div style="font-size:14px;color:var(--fg-2);">30 businesses researched. Outreach templates ready. Website live. Competitor analysed. The research phase is done — now it's time to send the first message.</div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:32px;text-align:center;border-top:1px solid var(--border);font-size:13px;color:var(--fg-3);">
+  Coastal Content Co · V Fernando · Busselton, WA · Updated March 2026
+</footer>
+
+</body>
+</html>
