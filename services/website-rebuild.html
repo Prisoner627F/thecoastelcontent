@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Rebuild — The Coastal Content Co</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #13111c; --surface: #1b192c; --surface-subtle: #201e30;
+      --border: #2d2b3a; --border-light: #3a3849;
+      --fg: #f7f7f8; --fg-2: #8a8897; --fg-3: #55536a;
+      --accent: #2ECFB8; --accent-dim: rgba(46,207,184,0.12); --accent-border: rgba(46,207,184,0.25);
+      --blue: #60a5fa; --blue-dim: rgba(96,165,250,0.12); --blue-border: rgba(96,165,250,0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.625; overflow-x: hidden; }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(19,17,28,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 56px; }
+    .logo { font-size: 15px; font-weight: 700; letter-spacing: -0.02em; color: var(--fg); text-decoration: none; }
+    .logo span { color: var(--accent); } .logo em { color: var(--fg-3); font-style: normal; }
+    .back-link { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--fg-2); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--fg); }
+    .btn-primary { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; padding: 10px 22px; border-radius: 9px; text-decoration: none; background: var(--blue); color: #080E1C; box-shadow: 0 0 0 1px rgba(96,165,250,0.3), 0 8px 24px -4px rgba(96,165,250,0.25); transition: transform 0.15s, box-shadow 0.15s; border: none; cursor: pointer; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(96,165,250,0.4), 0 12px 32px -4px rgba(96,165,250,0.4); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; padding: 10px 22px; border-radius: 9px; text-decoration: none; border: 1px solid var(--border); color: var(--fg-2); background: var(--surface); transition: border-color 0.2s, color 0.2s; }
+    .btn-ghost:hover { border-color: var(--border-light); color: var(--fg); }
+    .tag { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 5px; border: 1px solid var(--blue-border); color: var(--blue); background: var(--blue-dim); text-transform: uppercase; letter-spacing: 0.05em; }
+    .section { padding: 80px 24px; border-top: 1px solid var(--border); }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; background: var(--surface); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    @media(max-width:767px) { .grid-2 { grid-template-columns: 1fr; gap: 32px; } }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    @media(max-width:767px) { .grid-3 { grid-template-columns: 1fr; } }
+    .fade { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade.in { opacity: 1; transform: none; }
+    .faq-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 8px; background: var(--surface); }
+    .faq-q { padding: 16px 20px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-a { padding: 0 20px 16px; font-size: 14px; color: var(--fg-2); line-height: 1.7; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .check { width: 18px; height: 18px; border-radius: 50%; background: var(--blue-dim); border: 1px solid var(--blue-border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .step-num { width: 32px; height: 32px; border-radius: 8px; background: var(--blue-dim); border: 1px solid var(--blue-border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: var(--blue); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">coastal<span>content</span><em>co</em></a>
+    <a href="../index.html" class="back-link">← Back to home</a>
+    <a href="../index.html#contact" class="btn-primary">Get a free quote →</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────────── -->
+<section style="padding:100px 24px 80px;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(96,165,250,0.08) 0%,transparent 60%);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle, var(--fg-3) 1px, transparent 1px);background-size:28px 28px;opacity:0.12;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);"></div>
+  <div class="container" style="text-align:center;position:relative;z-index:1;">
+    <div class="tag" style="margin-bottom:24px;">Website Rebuild</div>
+    <h1 style="font-size:clamp(36px,6vw,64px);font-weight:700;letter-spacing:-0.035em;line-height:1.05;margin-bottom:20px;max-width:820px;margin-left:auto;margin-right:auto;">
+      Your website should be<br/><em style="font-family:'IBM Plex Serif',serif;font-style:italic;color:var(--blue);">winning you customers.</em>
+    </h1>
+    <p style="font-size:17px;color:var(--fg-2);max-width:560px;margin:0 auto 36px;line-height:1.65;">If your website is outdated, Facebook-only, or just not bringing in enquiries — we fix that. Fast, modern sites built with copy that converts and structure that ranks on Google.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;">
+      <a href="../index.html#contact" class="btn-primary">Get a free quote →</a>
+      <a href="#what-you-get" class="btn-ghost">See what's included</a>
+    </div>
+    <!-- Stats strip -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:32px;">
+      <div style="text-align:center;">
+        <div style="font-size:28px;font-weight:700;color:var(--blue);">$1,500</div>
+        <div style="font-size:12px;color:var(--fg-3);margin-top:2px;">starting price</div>
+      </div>
+      <div style="width:1px;background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:28px;font-weight:700;color:var(--blue);">2 weeks</div>
+        <div style="font-size:12px;color:var(--fg-3);margin-top:2px;">average delivery</div>
+      </div>
+      <div style="width:1px;background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:28px;font-weight:700;color:var(--blue);">100%</div>
+        <div style="font-size:12px;color:var(--fg-3);margin-top:2px;">copy written for you</div>
+      </div>
+      <div style="width:1px;background:var(--border);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:28px;font-weight:700;color:var(--blue);">You own it</div>
+        <div style="font-size:12px;color:var(--fg-3);margin-top:2px;">no lock-in hosting contracts</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THE PROBLEM ───────────────────────────────────────────── -->
+<section class="section fade">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="tag" style="margin-bottom:16px;">The problem</div>
+      <h2 style="font-size:clamp(26px,3.5vw,40px);font-weight:700;letter-spacing:-0.025em;line-height:1.15;margin-bottom:12px;">Most South West business websites are<br/><em style="font-family:'IBM Plex Serif',serif;font-style:italic;">costing you customers every day.</em></h2>
+      <p style="font-size:15px;color:var(--fg-2);max-width:540px;margin:0 auto;line-height:1.7;">Tourists Google you before they visit. Locals check your site before they call. If what they find doesn't impress them, they go to your competitor.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div style="font-size:24px;margin-bottom:12px;">📱</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:6px;">Not mobile friendly</div>
+        <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Over 70% of searches in the South West happen on a phone. If your site doesn't work on mobile, you're losing the majority of potential customers before they even read a word.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:24px;margin-bottom:12px;">🔍</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:6px;">Invisible on Google</div>
+        <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">A Facebook page or outdated website with no SEO structure means tourists searching "plumber Busselton" or "cafe Dunsborough" will never find you. Your competitors will.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:24px;margin-bottom:12px;">💸</div>
+        <div style="font-size:14px;font-weight:600;margin-bottom:6px;">Paying OTA commissions</div>
+        <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Accommodation businesses on Airbnb or Booking.com pay 15–20% commission on every booking. A direct-booking website pays for itself in 2–3 bookings and saves you thousands every year.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BEFORE / AFTER ────────────────────────────────────────── -->
+<section class="section fade">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="tag" style="margin-bottom:16px;">Before &amp; after</div>
+      <h2 style="font-size:clamp(24px,3vw,36px);font-weight:700;letter-spacing:-0.025em;line-height:1.2;">The difference a proper website makes</h2>
+    </div>
+    <div class="grid-2">
+      <!-- Before -->
+      <div>
+        <div style="font-size:13px;font-weight:600;color:#f87171;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;">Before</div>
+        <div style="border:1px solid rgba(248,113,113,0.2);border-radius:12px;background:rgba(248,113,113,0.04);overflow:hidden;">
+          <div style="padding:12px 16px;background:rgba(248,113,113,0.06);border-bottom:1px solid rgba(248,113,113,0.12);font-size:12px;color:rgba(248,113,113,0.6);">http:// yourbusiness.com.au</div>
+          <div style="padding:20px;display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:rgba(248,113,113,0.15);border:1px solid rgba(248,113,113,0.3);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 1l6 6M7 1L1 7" stroke="#f87171" stroke-width="1.5"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">Design last updated in 2015 — looks dated on every screen</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:rgba(248,113,113,0.15);border:1px solid rgba(248,113,113,0.3);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 1l6 6M7 1L1 7" stroke="#f87171" stroke-width="1.5"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">No HTTPS — browsers show a "Not Secure" warning</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:rgba(248,113,113,0.15);border:1px solid rgba(248,113,113,0.3);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 1l6 6M7 1L1 7" stroke="#f87171" stroke-width="1.5"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">No booking form or enquiry button — customers have to call</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:rgba(248,113,113,0.15);border:1px solid rgba(248,113,113,0.3);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 1l6 6M7 1L1 7" stroke="#f87171" stroke-width="1.5"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">Generic copy that says nothing about why to choose you</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:rgba(248,113,113,0.15);border:1px solid rgba(248,113,113,0.3);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 1l6 6M7 1L1 7" stroke="#f87171" stroke-width="1.5"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">Google can't index it — you're invisible in local search</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- After -->
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;">After</div>
+        <div style="border:1px solid var(--blue-border);border-radius:12px;background:var(--blue-dim);overflow:hidden;">
+          <div style="padding:12px 16px;background:rgba(96,165,250,0.08);border-bottom:1px solid var(--blue-border);font-size:12px;color:rgba(96,165,250,0.7);">🔒 https:// yourbusiness.com.au</div>
+          <div style="padding:20px;display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:var(--blue-dim);border:1px solid var(--blue-border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">Modern design that looks sharp on every phone and screen</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:var(--blue-dim);border:1px solid var(--blue-border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">SSL secured — trusted by Google and visitors</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:var(--blue-dim);border:1px solid var(--blue-border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">Booking or enquiry form that captures leads automatically</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:var(--blue-dim);border:1px solid var(--blue-border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">Copy written for you — your story, your voice, your pitch</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;">
+              <div style="width:16px;height:16px;border-radius:50%;background:var(--blue-dim);border:1px solid var(--blue-border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;">
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-2);">SEO structure built in — Google can find and rank you from day one</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHAT'S INCLUDED ───────────────────────────────────────── -->
+<section class="section fade" id="what-you-get">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="tag" style="margin-bottom:16px;">What's included</div>
+      <h2 style="font-size:clamp(24px,3vw,36px);font-weight:700;letter-spacing:-0.025em;line-height:1.2;margin-bottom:12px;">Everything done for you.<br/><em style="font-family:'IBM Plex Serif',serif;font-style:italic;">Nothing left to figure out.</em></h2>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--blue-dim);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:14px;">✍️</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">Copy written for you</div>
+        <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">Every word on your site — headlines, descriptions, service pages, about us — written in plain English that sells. You don't write a word.</p>
+      </div>
+      <div class="card">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--blue-dim);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:14px;">📱</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">Mobile-first design</div>
+        <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">Built to look sharp on every phone, tablet, and screen. Because most of your customers are searching on mobile.</p>
+      </div>
+      <div class="card">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--blue-dim);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:14px;">🔍</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">SEO built in</div>
+        <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">Page titles, meta descriptions, heading structure, local suburb keywords, Google Business link — all set up so Google can find and rank you.</p>
+      </div>
+      <div class="card">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--blue-dim);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:14px;">📩</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">Lead capture form</div>
+        <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">Enquiry or booking form set up and connected to your email. Leads come straight to you — no missed messages, no lost customers.</p>
+      </div>
+      <div class="card">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--blue-dim);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:14px;">⭐</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">Google Reviews display</div>
+        <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">Your best Google reviews shown on your website. Social proof where people are already deciding whether to trust you.</p>
+      </div>
+      <div class="card">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--blue-dim);border:1px solid var(--blue-border);display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:14px;">🔒</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:6px;">SSL + fast hosting</div>
+        <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">HTTPS secured and hosted on fast, reliable infrastructure. No "Not Secure" warnings, no slow loading times driving visitors away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHO IT'S FOR ──────────────────────────────────────────── -->
+<section class="section fade">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="tag" style="margin-bottom:16px;">Who it's for</div>
+      <h2 style="font-size:clamp(24px,3vw,36px);font-weight:700;letter-spacing:-0.025em;line-height:1.2;">Built for South West businesses who've outgrown their old website</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:20px;flex-shrink:0;">🔧</div>
+        <div>
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Trades & Services</div>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Plumbers, electricians, landscapers, builders — running on word-of-mouth with a basic directory listing or Facebook page. Time to own your Google presence.</p>
+        </div>
+      </div>
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:20px;flex-shrink:0;">🏡</div>
+        <div>
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Accommodation</div>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Chalets, villas, glamping, holiday rentals — paying 15–20% commission to Airbnb or Booking.com on every booking. A direct-booking site pays for itself fast.</p>
+        </div>
+      </div>
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:20px;flex-shrink:0;">🍽️</div>
+        <div>
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Cafes & Restaurants</div>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Relying on third-party listings or an outdated Wix site. Tourists search before they visit — your site needs to do the selling before they walk in the door.</p>
+        </div>
+      </div>
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:20px;flex-shrink:0;">🌿</div>
+        <div>
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Wellness & Health</div>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Yoga studios, massage therapists, allied health — Facebook-only or no website at all. Online booking is now the baseline expectation for every new patient or client.</p>
+        </div>
+      </div>
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:20px;flex-shrink:0;">🚤</div>
+        <div>
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Tourism Operators</div>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Whale watching, jetski tours, eco experiences — dependent on OTA listings and Instagram. A professional website means you own the booking relationship end-to-end.</p>
+        </div>
+      </div>
+      <div class="card" style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="font-size:20px;flex-shrink:0;">🛍️</div>
+        <div>
+          <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Retail & Boutiques</div>
+          <p style="font-size:13px;color:var(--fg-2);line-height:1.6;">Local shops relying on foot traffic and Instagram. A simple e-commerce or lookbook site means tourists can buy before they leave — and come back online after they go home.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HOW IT WORKS ──────────────────────────────────────────── -->
+<section class="section fade">
+  <div class="container">
+    <div style="max-width:680px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <div class="tag" style="margin-bottom:16px;">How it works</div>
+        <h2 style="font-size:clamp(24px,3vw,36px);font-weight:700;letter-spacing:-0.025em;line-height:1.2;">Up and running in two weeks</h2>
+        <p style="font-size:15px;color:var(--fg-2);margin-top:12px;line-height:1.7;">We handle the build from brief to launch. Your job is to answer a few questions at the start — we do the rest.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px;">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div class="step-num">1</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Free audit call — 20 minutes</div>
+            <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">We look at your current site (or lack of one), understand your business, and confirm exactly what your new site needs to do. You'll leave knowing what we'll build and what it'll cost.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div class="step-num">2</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:4px;">We write and design — week one</div>
+            <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">We gather your photos and any notes, then write all the copy and build the design. You review a draft before anything goes live.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div class="step-num">3</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Revisions and launch — week two</div>
+            <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">You request any changes, we make them fast. Once you're happy, we push it live — SSL secured, connected to your domain, and submitted to Google.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div class="step-num">4</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;margin-bottom:4px;">Optional: add ongoing content</div>
+            <p style="font-size:13px;color:var(--fg-2);line-height:1.65;">Pair your new site with our monthly social media, Google Business, or email marketing services — and we keep filling it with fresh content that drives ongoing traffic.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRICING ───────────────────────────────────────────────── -->
+<section class="section fade" id="pricing">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="tag" style="margin-bottom:16px;">Pricing</div>
+      <h2 style="font-size:clamp(24px,3vw,36px);font-weight:700;letter-spacing:-0.025em;line-height:1.2;">Simple, flat pricing.<br/><em style="font-family:'IBM Plex Serif',serif;font-style:italic;">No surprises.</em></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto;">
+      <!-- Starter -->
+      <div class="card" style="position:relative;">
+        <div style="font-size:12px;font-weight:700;color:var(--fg-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;">Starter</div>
+        <div style="font-size:36px;font-weight:700;color:var(--fg);margin-bottom:4px;">$1,500</div>
+        <div style="font-size:13px;color:var(--fg-3);margin-bottom:24px;">one-off project fee</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Up to 5 pages (Home, About, Services, Gallery, Contact)
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            All copy written by us
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Mobile-first design
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Contact / enquiry form
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Basic SEO setup
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            2 rounds of revisions
+          </div>
+        </div>
+        <a href="../index.html#contact" class="btn-ghost" style="width:100%;text-align:center;justify-content:center;">Get a quote →</a>
+      </div>
+      <!-- Growth -->
+      <div class="card" style="border-color:var(--blue-border);position:relative;">
+        <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--blue);color:#080E1C;font-size:11px;font-weight:700;padding:3px 12px;border-radius:0 0 8px 8px;text-transform:uppercase;letter-spacing:0.05em;">Most Popular</div>
+        <div style="font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;margin-top:16px;">Growth</div>
+        <div style="font-size:36px;font-weight:700;color:var(--fg);margin-bottom:4px;">$2,200</div>
+        <div style="font-size:13px;color:var(--fg-3);margin-bottom:24px;">one-off project fee</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Everything in Starter
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Up to 10 pages (includes service-specific pages)
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Google Reviews embed
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Suburb/local SEO landing pages
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Instagram feed embed
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            3 rounds of revisions
+          </div>
+        </div>
+        <a href="../index.html#contact" class="btn-primary" style="width:100%;text-align:center;justify-content:center;">Get a quote →</a>
+      </div>
+      <!-- Bundle -->
+      <div class="card">
+        <div style="font-size:12px;font-weight:700;color:var(--fg-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:16px;">Website + Content Bundle</div>
+        <div style="font-size:36px;font-weight:700;color:var(--fg);margin-bottom:4px;">$2,200 <span style="font-size:16px;color:var(--fg-3);">+ $500/mo</span></div>
+        <div style="font-size:13px;color:var(--fg-3);margin-bottom:24px;">build fee + ongoing content</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Growth website build included
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Monthly social media content
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Google Business profile management
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Site updated with fresh content monthly
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--fg-2);">
+            <div class="check"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 7l2-2 4-4" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            Best value — full digital presence, one team
+          </div>
+        </div>
+        <a href="../index.html#contact" class="btn-ghost" style="width:100%;text-align:center;justify-content:center;">Get a quote →</a>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--fg-3);margin-top:24px;">All prices include GST. Hosting costs extra (approx. $15–25/month via your provider of choice). You own your site — no lock-in.</p>
+  </div>
+</section>
+
+<!-- ─── FAQ ───────────────────────────────────────────────────── -->
+<section class="section fade">
+  <div class="container">
+    <div style="max-width:680px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:40px;">
+        <div class="tag" style="margin-bottom:16px;">FAQ</div>
+        <h2 style="font-size:clamp(22px,2.5vw,32px);font-weight:700;letter-spacing:-0.025em;">Common questions</h2>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I own the website once it's built? <span>+</span></div>
+        <div class="faq-a">Yes — 100%. You own the domain, the hosting account, and all the files. We hand everything over on completion. There are no monthly platform fees to us, no lock-in contracts, and no strings attached.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I already have a domain and hosting? <span>+</span></div>
+        <div class="faq-a">No problem. We can build on your existing setup or migrate you to a better host as part of the project. Either way, the final site goes where you want it.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Will I be able to update the site myself? <span>+</span></div>
+        <div class="faq-a">Yes. We build on platforms that are easy to manage — you'll be able to update photos, change opening hours, and add new content yourself. We also include a short walkthrough so you know how it works.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I need to write the copy myself? <span>+</span></div>
+        <div class="faq-a">No — that's part of what we do. We'll ask you a few questions about your business at the start, and we write everything from there. Most clients are surprised at how well we capture their voice without them having to write a single word.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How long does it take? <span>+</span></div>
+        <div class="faq-a">Most sites are live within 2 weeks of the project starting. Larger or more complex builds may take 3–4 weeks. We'll give you a clear timeline before we begin.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can you integrate online booking? <span>+</span></div>
+        <div class="faq-a">Yes. If you use a booking system (NowBookIt, Acuity, Calendly, or similar), we can embed it directly into your site. If you don't have one, we can recommend one that suits your business type.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ───────────────────────────────────────────────────── -->
+<section style="padding:80px 24px;text-align:center;border-top:1px solid var(--border);background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(96,165,250,0.07) 0%,transparent 60%);">
+  <div class="container">
+    <div class="tag" style="margin-bottom:24px;">Get started</div>
+    <h2 style="font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-0.03em;line-height:1.1;margin-bottom:16px;max-width:600px;margin-left:auto;margin-right:auto;">
+      Ready to have a website that<br/><em style="font-family:'IBM Plex Serif',serif;font-style:italic;color:var(--blue);">actually works for you?</em>
+    </h2>
+    <p style="font-size:16px;color:var(--fg-2);max-width:480px;margin:0 auto 36px;line-height:1.7;">Start with a free audit call. We'll look at your current online presence and tell you exactly what a new site would change — no pressure, no jargon.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="../index.html#contact" class="btn-primary">Book a free audit call →</a>
+      <a href="../index.html#services" class="btn-ghost">See all services</a>
+    </div>
+    <p style="font-size:13px;color:var(--fg-3);margin-top:20px;">From $1,500 · 2-week delivery · You own everything</p>
+  </div>
+</section>
+
+<script>
+  // FAQ toggle
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-q span').textContent = '+'; });
+      if (!isOpen) { item.classList.add('open'); q.querySelector('span').textContent = '−'; }
+    });
+  });
+  // Fade in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
