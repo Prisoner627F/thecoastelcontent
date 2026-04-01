@@ -783,40 +783,90 @@
         </div>
       </div>
       <div>
+        <!-- Results visual -->
         <div style="border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);box-shadow:0 8px 40px -8px rgba(0,0,0,0.6);">
-          <div style="display:flex;align-items:center;gap:6px;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface-subtle);">
-            <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#febc2e;"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#28c840;"></div>
-            <span style="font-size:12px;color:var(--fg-3);margin-left:8px;">Coastal Content Co · Your Content Pipeline</span>
+          <div style="padding:16px 20px;border-bottom:1px solid var(--border);background:var(--surface-subtle);display:flex;align-items:center;justify-content:space-between;">
+            <div style="font-size:13px;font-weight:600;">What our clients typically see</div>
+            <div style="font-size:11px;color:var(--accent);font-weight:600;background:var(--accent-dim);border:1px solid var(--accent-border);padding:2px 10px;border-radius:100px;">First 90 days</div>
           </div>
-          <div style="padding:20px;display:flex;flex-direction:column;gap:10px;">
-            <div style="font-size:11px;color:var(--fg-3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">This week — auto-scheduled for your business</div>
+          <div style="padding:20px;display:flex;flex-direction:column;gap:14px;">
+
+            <!-- Google calls -->
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <div style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;"><span style="font-size:15px;">📞</span> Google calls per month</div>
+                <div style="font-size:13px;font-weight:700;color:var(--accent);">+180%</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div>
+                  <div style="font-size:11px;color:var(--fg-3);margin-bottom:4px;">Before</div>
+                  <div style="height:6px;border-radius:100px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                    <div style="height:100%;width:28%;background:#f87171;border-radius:100px;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:11px;color:var(--accent);margin-bottom:4px;">After</div>
+                  <div style="height:6px;border-radius:100px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                    <div style="height:100%;width:85%;background:var(--accent);border-radius:100px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Instagram followers -->
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <div style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;"><span style="font-size:15px;">📱</span> Instagram followers</div>
+                <div style="font-size:13px;font-weight:700;color:var(--accent);">+240%</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div>
+                  <div style="font-size:11px;color:var(--fg-3);margin-bottom:4px;">Before</div>
+                  <div style="height:6px;border-radius:100px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                    <div style="height:100%;width:20%;background:#f87171;border-radius:100px;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:11px;color:var(--accent);margin-bottom:4px;">After</div>
+                  <div style="height:6px;border-radius:100px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                    <div style="height:100%;width:92%;background:var(--accent);border-radius:100px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Website enquiries -->
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <div style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;"><span style="font-size:15px;">✉️</span> Website enquiries</div>
+                <div style="font-size:13px;font-weight:700;color:var(--accent);">+320%</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div>
+                  <div style="font-size:11px;color:var(--fg-3);margin-bottom:4px;">Before</div>
+                  <div style="height:6px;border-radius:100px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                    <div style="height:100%;width:15%;background:#f87171;border-radius:100px;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:11px;color:var(--accent);margin-bottom:4px;">After</div>
+                  <div style="height:6px;border-radius:100px;background:rgba(255,255,255,0.06);overflow:hidden;">
+                    <div style="height:100%;width:90%;background:var(--accent);border-radius:100px;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Google ranking -->
             <div style="border:1px solid var(--accent-border);border-radius:10px;padding:12px;background:var(--accent-dim);display:flex;gap:12px;align-items:center;">
-              <div style="font-size:18px;">📸</div>
-              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">Mon — Instagram post</div><div style="font-size:12px;color:var(--fg-3);">Caption written · Hashtags optimised · Scheduled 7am</div></div>
-              <div style="font-size:11px;font-weight:600;color:var(--accent);background:rgba(46,207,184,0.15);padding:2px 8px;border-radius:4px;white-space:nowrap;">Live</div>
+              <div style="width:36px;height:36px;border-radius:8px;background:rgba(46,207,184,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">📍</div>
+              <div>
+                <div style="font-size:13px;font-weight:600;margin-bottom:2px;">Google Maps ranking</div>
+                <div style="font-size:12px;color:var(--fg-2);">Average client moves from page 2 → <strong style="color:var(--accent);">top 3 local results</strong> within 60 days</div>
+              </div>
             </div>
-            <div style="border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface-subtle);display:flex;gap:12px;align-items:center;">
-              <div style="font-size:18px;">🎬</div>
-              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">Wed — Instagram Reel</div><div style="font-size:12px;color:var(--fg-3);">Script written · Hook optimised · Auto-scheduled</div></div>
-              <div style="font-size:11px;font-weight:600;color:#fbbf24;background:rgba(251,191,36,0.12);padding:2px 8px;border-radius:4px;white-space:nowrap;">Ready</div>
-            </div>
-            <div style="border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface-subtle);display:flex;gap:12px;align-items:center;">
-              <div style="font-size:18px;">📍</div>
-              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">Thu — Google post</div><div style="font-size:12px;color:var(--fg-3);">Weekly update · Offer highlighted · CTA added</div></div>
-              <div style="font-size:11px;font-weight:600;color:#fbbf24;background:rgba(251,191,36,0.12);padding:2px 8px;border-radius:4px;white-space:nowrap;">Ready</div>
-            </div>
-            <div style="border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface-subtle);display:flex;gap:12px;align-items:center;">
-              <div style="font-size:18px;">⚡</div>
-              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">AI Lead Response — active 24/7</div><div style="font-size:12px;color:var(--fg-3);">3 DMs replied · 1 booking confirmed today</div></div>
-              <div style="font-size:11px;font-weight:600;color:#6fcf97;background:rgba(111,207,151,0.12);padding:2px 8px;border-radius:4px;white-space:nowrap;">Active</div>
-            </div>
-            <div style="border:1px solid var(--border);border-radius:10px;padding:12px;background:var(--surface-subtle);display:flex;gap:12px;align-items:center;">
-              <div style="font-size:18px;">📧</div>
-              <div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:600;">Fri — Email newsletter</div><div style="font-size:12px;color:var(--fg-3);">Monthly send · 340 subscribers · Draft ready</div></div>
-              <div style="font-size:11px;font-weight:600;color:var(--fg-3);background:var(--surface);border:1px solid var(--border);padding:2px 8px;border-radius:4px;white-space:nowrap;">Draft</div>
-            </div>
+
+            <div style="font-size:11px;color:var(--fg-3);text-align:center;">Results vary by business and starting point. Based on typical client outcomes.</div>
           </div>
         </div>
       </div>
@@ -1124,59 +1174,65 @@
 
   <!-- ─── COMPARISON ─────────────────────────────────────────────── -->
   <section style="padding:80px 24px;border-top:1px solid var(--border);">
-    <div style="max-width:1100px;margin:0 auto;">
+    <div style="max-width:1000px;margin:0 auto;">
       <div class="fade" style="text-align:center;margin-bottom:48px;">
-        <h2 style="font-size:clamp(26px,4vw,40px);font-weight:700;letter-spacing:-0.025em;margin-bottom:10px;">Coastal Content Co vs <em style="font-family:'IBM Plex Serif',serif;font-style:italic;">Your Other Options</em></h2>
-        <p style="font-size:15px;color:var(--fg-2);max-width:480px;margin:0 auto;line-height:1.65;">Most businesses either overpay a city agency or struggle to DIY. We built a third option.</p>
+        <div style="display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:5px;margin-bottom:16px;border:1px solid var(--accent-border);color:var(--accent);background:var(--accent-dim);text-transform:uppercase;letter-spacing:0.05em;">The difference</div>
+        <h2 style="font-size:clamp(26px,4vw,40px);font-weight:700;letter-spacing:-0.025em;margin-bottom:10px;">What changes when you stop<br/><em style="font-family:'IBM Plex Serif',serif;font-style:italic;">doing it alone.</em></h2>
+        <p style="font-size:15px;color:var(--fg-2);max-width:480px;margin:0 auto;line-height:1.65;">Most South West businesses are invisible online — not because their product isn't great, but because there's no one looking after their digital presence.</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:14px;overflow:hidden;" class="fade comp-grid">
 
-        <!-- DIY -->
-        <div style="background:var(--surface);padding:28px;">
-          <div style="font-size:24px;margin-bottom:12px;">😓</div>
-          <div style="font-size:15px;font-weight:700;margin-bottom:6px;">Doing It Yourself</div>
-          <div style="display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:100px;background:rgba(239,68,68,0.15);color:#f87171;margin-bottom:16px;">TIME DRAIN</div>
-          <p style="font-size:13px;color:var(--fg-3);margin-bottom:20px;line-height:1.6;">Spending evenings trying to figure out what to post, never consistent, no real strategy behind it.</p>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>Posts once a week when you remember</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>No local SEO strategy</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>Miss enquiries after hours</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>Costs you hours every week</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#f87171;flex-shrink:0;">✕</span>No reporting or improvement</div>
-          </div>
+      <!-- Row headers -->
+      <div class="fade" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:0;">
+        <div style="padding:14px 20px;"></div>
+        <div style="padding:14px 20px;text-align:center;border:1px solid var(--border);border-right:none;border-bottom:none;border-radius:12px 0 0 0;background:var(--surface-subtle);">
+          <div style="font-size:13px;font-weight:700;color:var(--fg-3);">Without Coastal Content Co</div>
+        </div>
+        <div style="padding:14px 20px;text-align:center;border:1px solid var(--accent-border);border-bottom:none;border-radius:0 12px 0 0;background:var(--accent-dim);">
+          <div style="font-size:13px;font-weight:700;color:var(--accent);">With Coastal Content Co 🌊</div>
+        </div>
+      </div>
+
+      <!-- Rows -->
+      <div class="fade" style="border:1px solid var(--border);border-radius:0 0 12px 12px;overflow:hidden;">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;font-size:13px;font-weight:600;background:var(--surface);border-right:1px solid var(--border);">Google visibility</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-3);background:var(--surface);border-right:1px solid var(--border);">Buried on page 2. Tourists find your competitor first.</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-2);background:rgba(46,207,184,0.04);">Optimised profile, weekly posts, top 3 for local searches.</div>
         </div>
 
-        <!-- Perth Agency -->
-        <div style="background:var(--surface);padding:28px;">
-          <div style="font-size:24px;margin-bottom:12px;">🏙️</div>
-          <div style="font-size:15px;font-weight:700;margin-bottom:6px;">Perth Agency</div>
-          <div style="display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:100px;background:rgba(245,158,11,0.15);color:#fbbf24;margin-bottom:16px;">EXPENSIVE</div>
-          <p style="font-size:13px;color:var(--fg-3);margin-bottom:20px;line-height:1.6;">They don't know Busselton from Bunbury. Generic content, locked contracts, and $3–5k/month minimum.</p>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>No local knowledge or context</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>$3,000–$5,000+/month minimum</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>6–12 month lock-in contracts</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>Junior staff manage your account</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-3);"><span style="color:#fbbf24;flex-shrink:0;">✕</span>Hides pricing until you book a call</div>
-          </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;font-size:13px;font-weight:600;background:var(--surface);border-right:1px solid var(--border);">Social media</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-3);background:var(--surface);border-right:1px solid var(--border);">Posted once 3 weeks ago. Followers not growing.</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-2);background:rgba(46,207,184,0.04);">3–5 posts per week, Reels, captions — all done for you.</div>
         </div>
 
-        <!-- Coastal Content Co -->
-        <div style="background:var(--accent-dim);padding:28px;border-left:1px solid var(--accent-border);">
-          <div style="font-size:24px;margin-bottom:12px;">🌊</div>
-          <div style="font-size:15px;font-weight:700;margin-bottom:6px;color:var(--accent);">Coastal Content Co</div>
-          <div style="display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:100px;background:rgba(46,207,184,0.2);color:var(--accent);margin-bottom:16px;">BEST VALUE</div>
-          <p style="font-size:13px;color:var(--fg-2);margin-bottom:20px;line-height:1.6;">Local expert + AI production = big-agency results at a fraction of the cost. Month-to-month. No surprises.</p>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>Based in Busselton/Dunsborough</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>From $500/month — transparent pricing</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>No lock-in — cancel anytime</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>AI-powered speed, human strategy</div>
-            <div style="display:flex;gap:10px;font-size:13px;color:var(--fg-2);"><span style="color:var(--accent);flex-shrink:0;">✓</span>Monthly reporting in plain English</div>
-          </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;font-size:13px;font-weight:600;background:var(--surface);border-right:1px solid var(--border);">Enquiries after hours</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-3);background:var(--surface);border-right:1px solid var(--border);">Leads go cold overnight. You call back, they've moved on.</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-2);background:rgba(46,207,184,0.04);">AI responds in seconds, 24/7 across every channel.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;font-size:13px;font-weight:600;background:var(--surface);border-right:1px solid var(--border);">Website</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-3);background:var(--surface);border-right:1px solid var(--border);">Outdated, slow, no clear call to action. Visitors leave.</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-2);background:rgba(46,207,184,0.04);">Fast, modern, written to convert. Live in 2 weeks.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border);">
+          <div style="padding:16px 20px;font-size:13px;font-weight:600;background:var(--surface);border-right:1px solid var(--border);">Your time</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-3);background:var(--surface);border-right:1px solid var(--border);">Hours per week figuring out what to post. Still no strategy.</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-2);background:rgba(46,207,184,0.04);">Zero. You run your business. We handle the rest.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;">
+          <div style="padding:16px 20px;font-size:13px;font-weight:600;background:var(--surface);border-right:1px solid var(--border);">Cost</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-3);background:var(--surface);border-right:1px solid var(--border);">Free — but costing you customers every single day.</div>
+          <div style="padding:16px 20px;font-size:13px;color:var(--fg-2);background:rgba(46,207,184,0.04);">From $500/month. No lock-in. Cancel anytime.</div>
         </div>
 
       </div>
+
       <div style="text-align:center;margin-top:32px;" class="fade">
         <a href="#contact" class="btn-primary">Get your free audit →</a>
         <p style="font-size:13px;color:var(--fg-3);margin-top:12px;">No commitment. We show you what's missing and what it would take to fix it.</p>
@@ -1369,7 +1425,16 @@
             Send — get my free audit →
           </button>
         </form>
-        <p style="font-size:13px;color:var(--fg-3);margin-top:16px;">Or email directly at <span style="color:var(--fg-2);">hello@coastalcontentco.com.au</span></p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-top:16px;">
+          <a href="mailto:vihangaf@thecoastalcontent.org" style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--fg-2);text-decoration:none;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="10" height="7" rx="1"/><path d="M2 4l5 4 5-4"/></svg>
+            vihangaf@thecoastalcontent.org
+          </a>
+          <a href="tel:+61416403470" style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--fg-2);text-decoration:none;">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 2a1 1 0 011-1h2a1 1 0 011 1v1a1 1 0 01-1 1H6a1 1 0 01-1-1V2zM3.5 7.5a7.5 7.5 0 007 7"/><path d="M2 5.5C2 9.09 4.91 12 8.5 12"/></svg>
+            +61 416 403 470
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -1384,12 +1449,13 @@
         </div>
         <div class="footer-col">
           <h4>Services</h4>
-          <a href="#services">Social Media Content</a>
-          <a href="#services">Google Profile Management</a>
-          <a href="#services">Website Copywriting</a>
-          <a href="#services">AI Lead Response</a>
-          <a href="#services">CRM & Automation</a>
-          <a href="#services">Email Marketing</a>
+          <a href="services/social-media.html">Social Media Content</a>
+          <a href="services/google-business.html">Google Profile Management</a>
+          <a href="services/website-rebuild.html">Website Rebuild</a>
+          <a href="services/website-copywriting.html">Website Copywriting</a>
+          <a href="services/ai-lead-response.html">AI Lead Response</a>
+          <a href="services/crm-automation.html">CRM & Automation</a>
+          <a href="services/email-marketing.html">Email Marketing</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
@@ -1408,7 +1474,8 @@
           <h4>Connect</h4>
           <a href="#">Instagram</a>
           <a href="#">Facebook</a>
-          <a href="#">hello@coastalcontentco.com.au</a>
+          <a href="mailto:vihangaf@thecoastalcontent.org">vihangaf@thecoastalcontent.org</a>
+          <a href="tel:+61416403470">+61 416 403 470</a>
         </div>
       </div>
       <div class="footer-bottom">
