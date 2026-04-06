@@ -88,10 +88,7 @@
       position: relative; overflow: hidden;
       padding: 140px 24px 80px;
       text-align: center;
-      background:
-        radial-gradient(ellipse 60% 50% at 15% 60%, rgba(99,102,241,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 85% 80%, rgba(244,63,94,0.06) 0%, transparent 55%),
-        radial-gradient(ellipse 90% 60% at 50% 0%, rgba(46,207,184,0.07) 0%, transparent 60%);
+      background: var(--bg);
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
@@ -103,29 +100,15 @@
     .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
 
-    /* Floating shapes hero */
-    @keyframes shapeEntry {
-      from { opacity: 0; transform: translateY(-120px); }
-      to   { opacity: 1; transform: translateY(0px); }
-    }
-    @keyframes shapeFloat {
-      0%, 100% { transform: translateY(0px); }
-      50%       { transform: translateY(15px); }
+    /* Glowy waves hero */
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
     }
     @keyframes heroFadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0px); }
-    }
-    .shape-wrap {
-      position: absolute;
-      pointer-events: none;
-      animation: shapeEntry 2.4s cubic-bezier(0.23,0.86,0.39,0.96) both;
-    }
-    .shape-inner { animation: shapeFloat 12s ease-in-out infinite; }
-    .shape {
-      border-radius: 9999px;
-      border: 2px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(2px);
     }
     .hero-anim { animation: heroFadeUp 1s cubic-bezier(0.23,0.86,0.39,0.96) both; }
     .hero h1 {
@@ -417,6 +400,23 @@
       .panel-sidebar { display: none; }
       .rail { display: none; }
       .form-grid { grid-template-columns: 1fr; }
+
+      /* Hero mobile */
+      .hero { padding: 100px 20px 60px; }
+      .hero h1 { font-size: clamp(32px, 9vw, 52px); letter-spacing: -0.025em; }
+      .hero p { font-size: 15px; }
+      .hero-ctas { gap: 10px; }
+      .hero-ctas a { width: 100%; justify-content: center; }
+      #hero-canvas { position: absolute; }
+
+      /* Services grid: single column on small phones */
+      .svc-grid-mobile { grid-template-columns: 1fr !important; }
+
+      /* Trust grid wraps nicely */
+      .trust-item { padding: 8px 16px; font-size: 12px; }
+
+      /* Pricing cards */
+      .cta-section h2 { font-size: clamp(28px, 8vw, 44px); }
     }
   </style>
 </head>
@@ -452,39 +452,7 @@
 
   <!-- ─── HERO ─────────────────────────────────────────────── -->
   <section class="hero">
-
-    <!-- Floating shapes -->
-    <!-- Shape 1: large indigo pill, left -->
-    <div class="shape-wrap" style="left:-5%;top:20%;animation-delay:0.3s;">
-      <div class="shape-inner" style="animation-delay:0s;">
-        <div class="shape" style="width:600px;height:140px;transform:rotate(12deg);background:radial-gradient(ellipse at center,rgba(99,102,241,0.18) 0%,transparent 70%);"></div>
-      </div>
-    </div>
-    <!-- Shape 2: rose pill, right -->
-    <div class="shape-wrap" style="right:0%;top:75%;animation-delay:0.5s;">
-      <div class="shape-inner" style="animation-delay:1.5s;">
-        <div class="shape" style="width:500px;height:120px;transform:rotate(-15deg);background:radial-gradient(ellipse at center,rgba(244,63,94,0.15) 0%,transparent 70%);"></div>
-      </div>
-    </div>
-    <!-- Shape 3: violet pill, bottom left -->
-    <div class="shape-wrap" style="left:10%;bottom:10%;animation-delay:0.4s;">
-      <div class="shape-inner" style="animation-delay:3s;">
-        <div class="shape" style="width:300px;height:80px;transform:rotate(-8deg);background:radial-gradient(ellipse at center,rgba(167,139,250,0.15) 0%,transparent 70%);"></div>
-      </div>
-    </div>
-    <!-- Shape 4: amber pill, top right -->
-    <div class="shape-wrap" style="right:20%;top:15%;animation-delay:0.6s;">
-      <div class="shape-inner" style="animation-delay:4.5s;">
-        <div class="shape" style="width:200px;height:60px;transform:rotate(20deg);background:radial-gradient(ellipse at center,rgba(245,158,11,0.15) 0%,transparent 70%);"></div>
-      </div>
-    </div>
-    <!-- Shape 5: cyan pill, top left area -->
-    <div class="shape-wrap" style="left:25%;top:10%;animation-delay:0.7s;">
-      <div class="shape-inner" style="animation-delay:6s;">
-        <div class="shape" style="width:150px;height:40px;transform:rotate(-25deg);background:radial-gradient(ellipse at center,rgba(6,182,212,0.18) 0%,transparent 70%);"></div>
-      </div>
-    </div>
-
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="dot-grid"></div>
     <div style="position:relative;z-index:1;">
       <div class="hero-anim" style="animation-delay:0.2s;">
@@ -556,7 +524,7 @@
         <h2 style="font-size:clamp(28px,4vw,42px);font-weight:700;letter-spacing:-0.025em;margin-bottom:12px;">Our AI-Powered <em style="font-family:'IBM Plex Serif',serif;font-style:italic;">Marketing Services</em></h2>
         <p style="font-size:16px;color:var(--fg-2);max-width:520px;margin:0 auto;line-height:1.65;">Everything your business needs to get found, chosen, and remembered — done for you every month.</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;" class="fade">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:20px;" class="fade">
 
         <!-- Website Rebuild -->
         <a href="services/website-rebuild.html" class="svc-card" style="border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;text-decoration:none;color:inherit;display:block;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;">
@@ -1407,6 +1375,80 @@
     <p style="text-align:center;font-size:12px;color:var(--fg-3);margin-top:24px;padding:0 24px;">* Testimonials are illustrative placeholders — to be replaced with real client quotes once onboarded</p>
   </section>
 
+  <!-- ─── INSTAGRAM ───────────────────────────────────────────── -->
+  <section style="padding:80px 24px;border-top:1px solid var(--border);background:var(--surface-subtle);">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="fade" style="text-align:center;margin-bottom:48px;">
+        <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#ig-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs>
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          <span style="font-size:14px;font-weight:600;color:var(--fg-2);letter-spacing:0.01em;">@thecoastalcontentco</span>
+        </a>
+        <h2 style="font-size:clamp(26px,4vw,38px);font-weight:700;letter-spacing:-0.025em;margin-bottom:10px;">Follow along on <em style="font-family:'IBM Plex Serif',serif;font-style:italic;color:var(--accent);">Instagram</em></h2>
+        <p style="font-size:15px;color:var(--fg-2);max-width:440px;margin:0 auto;">Tips, results, and behind-the-scenes of what's actually working for South West businesses online.</p>
+      </div>
+
+      <!-- Post grid -->
+      <div class="fade" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(160px,100%),1fr));gap:12px;margin-bottom:40px;">
+        <!-- Post 1 -->
+        <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener" style="text-decoration:none;display:block;aspect-ratio:1;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1a2d3a,#0d2233);border:1px solid var(--border);position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;">
+            <div style="font-size:28px;">📱</div>
+            <div style="font-size:10px;color:var(--fg-3);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4;">Social media tips</div>
+          </div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.5),transparent);opacity:0;transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0"></div>
+        </a>
+        <!-- Post 2 -->
+        <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener" style="text-decoration:none;display:block;aspect-ratio:1;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1e2a1a,#0d2014);border:1px solid var(--border);position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;">
+            <div style="font-size:28px;">🌊</div>
+            <div style="font-size:10px;color:var(--fg-3);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4;">South West business wins</div>
+          </div>
+        </a>
+        <!-- Post 3 -->
+        <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener" style="text-decoration:none;display:block;aspect-ratio:1;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1a1a2d,#0d0d22);border:1px solid var(--border);position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;">
+            <div style="font-size:28px;">📊</div>
+            <div style="font-size:10px;color:var(--fg-3);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4;">Google ranking results</div>
+          </div>
+        </a>
+        <!-- Post 4 -->
+        <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener" style="text-decoration:none;display:block;aspect-ratio:1;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#2d1a1a,#220d0d);border:1px solid var(--border);position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;">
+            <div style="font-size:28px;">✍️</div>
+            <div style="font-size:10px;color:var(--fg-3);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4;">Content creation tips</div>
+          </div>
+        </a>
+        <!-- Post 5 -->
+        <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener" style="text-decoration:none;display:block;aspect-ratio:1;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1a2d2a,#0d221f);border:1px solid var(--border);position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;">
+            <div style="font-size:28px;">🏖️</div>
+            <div style="font-size:10px;color:var(--fg-3);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4;">Busselton & Dunsborough</div>
+          </div>
+        </a>
+        <!-- Post 6 -->
+        <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener" style="text-decoration:none;display:block;aspect-ratio:1;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#2a1a2d,#1a0d22);border:1px solid var(--border);position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.5)'" onmouseover="this.style.transform='scale(1.03)';this.style.boxShadow='0 12px 32px rgba(0,0,0,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px;text-align:center;">
+            <div style="font-size:28px;">🤖</div>
+            <div style="font-size:10px;color:var(--fg-3);letter-spacing:0.08em;text-transform:uppercase;line-height:1.4;">AI marketing explained</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Follow CTA -->
+      <div class="fade" style="text-align:center;">
+        <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:10px;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;color:#fff;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);box-shadow:0 4px 20px rgba(220,39,67,0.3);transition:opacity 0.2s,transform 0.2s;" onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'" onmouseout="this.style.opacity='1';this.style.transform=''">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Follow @thecoastalcontentco
+        </a>
+        <p style="font-size:12px;color:var(--fg-3);margin-top:14px;">These post previews are placeholders — replace with your real posts once live</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── CTA / CONTACT ──────────────────────────────────────── -->
   <section class="cta-section" id="contact">
     <div class="fade">
@@ -1494,10 +1536,40 @@
         </div>
         <div class="footer-col">
           <h4>Connect</h4>
-          <a href="#">Instagram</a>
-          <a href="#">Facebook</a>
-          <a href="mailto:vihangaf@thecoastalcontent.org">vihangaf@thecoastalcontent.org</a>
-          <a href="tel:0478515414">0478 515 414</a>
+          <!-- Social icons -->
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e1306c'" onmouseout="this.style.color='var(--fg-3)'">
+              <span style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </span>
+              @thecoastalcontentco
+            </a>
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/thecoastalcontentco" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='var(--fg-3)'">
+              <span style="width:28px;height:28px;border-radius:7px;background:#1877f2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </span>
+              The Coastal Content Co
+            </a>
+            <!-- X / Twitter -->
+            <a href="https://www.x.com/coastalcontentco" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--fg-3)'">
+              <span style="width:28px;height:28px;border-radius:7px;background:#000;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </span>
+              @coastalcontentco
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/company/thecoastalcontentco" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='var(--fg-3)'">
+              <span style="width:28px;height:28px;border-radius:7px;background:#0a66c2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              </span>
+              The Coastal Content Co
+            </a>
+          </div>
+          <!-- Contact -->
+          <a href="mailto:vihangaf@thecoastalcontent.org" style="font-size:12px;color:var(--fg-3);">vihangaf@thecoastalcontent.org</a>
+          <a href="tel:0478515414" style="font-size:12px;color:var(--fg-3);">0478 515 414</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -1523,6 +1595,84 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+    // ── Glowy Waves Hero Canvas ─────────────────────────────────────
+    (function() {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d');
+      let animId, time = 0;
+
+      const mouse = { x: 0, y: 0 };
+      const target = { x: 0, y: 0 };
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const mouseInfluence = prefersReduced ? 10 : 70;
+      const influenceRadius = prefersReduced ? 160 : 320;
+      const smoothing = prefersReduced ? 0.04 : 0.1;
+
+      const waves = [
+        { offset: 0,              amplitude: 70, frequency: 0.003,  color: 'rgba(46,207,184,1)',     opacity: 0.45 },
+        { offset: Math.PI / 2,   amplitude: 90, frequency: 0.0026, color: 'rgba(46,207,184,0.7)',   opacity: 0.35 },
+        { offset: Math.PI,       amplitude: 60, frequency: 0.0034, color: 'rgba(99,102,241,0.65)',  opacity: 0.28 },
+        { offset: Math.PI * 1.5, amplitude: 80, frequency: 0.0022, color: 'rgba(244,63,94,0.5)',    opacity: 0.22 },
+        { offset: Math.PI * 2,   amplitude: 55, frequency: 0.004,  color: 'rgba(247,247,248,0.3)',  opacity: 0.18 },
+      ];
+
+      function resize() {
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        mouse.x = target.x = canvas.width / 2;
+        mouse.y = target.y = canvas.height / 2;
+      }
+
+      function drawWave(wave) {
+        ctx.save();
+        ctx.beginPath();
+        for (let x = 0; x <= canvas.width; x += 4) {
+          const dx = x - mouse.x;
+          const dy = canvas.height / 2 - mouse.y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          const inf = Math.max(0, 1 - dist / influenceRadius);
+          const me = inf * mouseInfluence * Math.sin(time * 0.001 + x * 0.01 + wave.offset);
+          const y = canvas.height / 2
+            + Math.sin(x * wave.frequency + time * 0.002 + wave.offset) * wave.amplitude
+            + Math.sin(x * wave.frequency * 0.4 + time * 0.003) * (wave.amplitude * 0.45)
+            + me;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = wave.color;
+        ctx.globalAlpha = wave.opacity;
+        ctx.shadowBlur = 35;
+        ctx.shadowColor = wave.color;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function animate() {
+        time++;
+        mouse.x += (target.x - mouse.x) * smoothing;
+        mouse.y += (target.y - mouse.y) * smoothing;
+
+        const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        grad.addColorStop(0, '#13111c');
+        grad.addColorStop(1, '#16141f');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.globalAlpha = 1;
+        ctx.shadowBlur = 0;
+        waves.forEach(drawWave);
+        animId = requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('mousemove', e => { target.x = e.clientX; target.y = e.clientY; });
+      window.addEventListener('mouseleave', () => { target.x = canvas.width/2; target.y = canvas.height/2; });
+      window.addEventListener('resize', resize, { passive: true });
+
+      resize();
+      animate();
+    })();
 
     // Form submit
     function handleSubmit(e) {
