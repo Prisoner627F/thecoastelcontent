@@ -19,7 +19,7 @@ const MIME = {
 };
 
 http.createServer((req, res) => {
-  let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : req.url);
+  let filePath = path.join(__dirname, req.url === '/' ? 'index.html' : decodeURIComponent(req.url.split('?')[0]));
   const ext = path.extname(filePath);
   const contentType = MIME[ext] || 'text/plain';
 

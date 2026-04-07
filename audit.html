@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Marketing Audit — The Coastal Content Co</title>
+  <meta name="description" content="Get a free marketing audit for your South West WA business. We'll review your social media, Google presence, and website and send you a personalised report." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=IBM+Plex+Serif:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #13111c;
+      --surface: #1b192c;
+      --surface-subtle: #201e30;
+      --border: #2d2b3a;
+      --border-light: #3a3849;
+      --fg: #f7f7f8;
+      --fg-2: #8a8897;
+      --fg-3: #55536a;
+      --accent: #2ECFB8;
+      --accent-dim: rgba(46,207,184,0.12);
+      --accent-border: rgba(46,207,184,0.25);
+      --accent-glow: rgba(46,207,184,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      line-height: 1.625;
+    }
+    .serif { font-family: 'IBM Plex Serif', serif; }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s, backdrop-filter 0.3s;
+    }
+    nav.scrolled {
+      border-color: var(--border);
+      background: rgba(19,17,28,0.8);
+      backdrop-filter: blur(16px);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 80px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a {
+      font-size: 14px; color: var(--fg-2); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+    .btn-nav {
+      font-size: 13px; font-weight: 600; padding: 7px 16px;
+      border-radius: 8px; text-decoration: none; transition: opacity 0.2s;
+      background: var(--fg); color: var(--bg);
+    }
+    .btn-nav:hover { opacity: 0.85; }
+    .menu-btn { display: none; background: none; border: none; color: var(--fg-2); cursor: pointer; padding: 4px; }
+    .mobile-nav { display: none; position: fixed; inset: 0; z-index: 99; background: var(--bg); padding: 80px 24px 24px; flex-direction: column; gap: 24px; }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-size: 18px; color: var(--fg); text-decoration: none; font-weight: 500; }
+
+    /* Dot grid */
+    .dot-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, var(--fg-3) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.18;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 140px 24px 80px;
+      text-align: center;
+      background: var(--bg);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 500; color: var(--fg-2);
+      border: 1px solid var(--border); border-radius: 100px;
+      padding: 5px 14px; margin-bottom: 32px;
+      background: var(--surface);
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.85)} }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0px); }
+    }
+    .hero-anim { animation: heroFadeUp 1s cubic-bezier(0.23,0.86,0.39,0.96) both; }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 700; letter-spacing: -0.035em; line-height: 1.05;
+      margin-bottom: 20px; max-width: 720px; margin-left: auto; margin-right: auto;
+    }
+    .hero h1 em { font-family: 'IBM Plex Serif', serif; font-style: italic; color: var(--accent); }
+    .hero p {
+      font-size: 17px; color: var(--fg-2); max-width: 520px;
+      margin: 0 auto 0; line-height: 1.65;
+    }
+
+    /* Canvas waves */
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    /* What you get strip */
+    .gets-strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 24px;
+      background: var(--surface-subtle);
+    }
+    .gets-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0;
+    }
+    .gets-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 28px; border: 1px solid var(--border);
+      font-size: 13px; font-weight: 500; color: var(--fg-2);
+      border-radius: 0; margin: -1px;
+    }
+    .gets-item:first-child { border-radius: 8px 0 0 8px; }
+    .gets-item:last-child  { border-radius: 0 8px 8px 0; }
+    .gets-check { color: var(--accent); flex-shrink: 0; }
+
+    /* Form section */
+    .form-section {
+      max-width: 680px; margin: 0 auto; padding: 80px 24px;
+    }
+    .form-label {
+      font-size: 13px; font-weight: 500; color: var(--fg-2);
+      display: block; margin-bottom: 6px;
+    }
+    .form-label span { color: var(--accent); }
+    .form-field {
+      width: 100%; padding: 11px 14px; border-radius: 8px; font-size: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--fg); outline: none; font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-field::placeholder { color: var(--fg-3); }
+    .form-field:focus { border-color: var(--accent-border); box-shadow: 0 0 0 3px rgba(46,207,184,0.06); }
+    select.form-field { cursor: pointer; }
+    select.form-field option { background: var(--surface); }
+    textarea.form-field { resize: none; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+    @media(max-width:560px) { .form-row { grid-template-columns: 1fr; } }
+
+    /* Checkbox grid */
+    .check-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px;
+    }
+    .check-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 8px; cursor: pointer;
+      border: 1px solid var(--border); background: var(--surface);
+      font-size: 13px; color: var(--fg-2);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .check-item:hover { border-color: var(--border-light); color: var(--fg); }
+    .check-item input[type="checkbox"] { display: none; }
+    .check-item.selected {
+      border-color: var(--accent-border);
+      background: var(--accent-dim);
+      color: var(--fg);
+    }
+    .check-box {
+      width: 16px; height: 16px; border-radius: 4px; flex-shrink: 0;
+      border: 1.5px solid var(--border-light);
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .check-item.selected .check-box {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+    .check-tick { display: none; }
+    .check-item.selected .check-tick { display: block; }
+
+    /* Submit button */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 15px; font-weight: 600; padding: 13px 28px;
+      border-radius: 9px; text-decoration: none; cursor: pointer;
+      background: var(--accent); color: #080E1C;
+      box-shadow: 0 0 0 1px rgba(46,207,184,0.3), 0 8px 24px -4px rgba(46,207,184,0.25);
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      border: none; font-family: inherit; width: 100%;
+      justify-content: center;
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(46,207,184,0.4), 0 12px 32px -4px rgba(46,207,184,0.4); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    /* Divider */
+    .form-divider {
+      height: 1px; background: var(--border);
+      margin: 32px 0;
+    }
+    .form-section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--fg-3); margin-bottom: 20px;
+    }
+
+    /* Success state */
+    .success-box {
+      display: none; text-align: center; padding: 56px 24px;
+    }
+    .success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px; font-size: 28px;
+    }
+    .success-box h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .success-box p { font-size: 15px; color: var(--fg-2); line-height: 1.65; }
+
+    /* Social proof sidebar */
+    .proof-card {
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px; background: var(--surface); margin-bottom: 16px;
+    }
+    .proof-stars { color: #fbbf24; font-size: 12px; margin-bottom: 8px; }
+    .proof-text { font-size: 13px; color: var(--fg-2); line-height: 1.6; margin-bottom: 12px; }
+    .proof-author { display: flex; align-items: center; gap: 10px; }
+    .proof-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .proof-name { font-size: 13px; font-weight: 600; }
+    .proof-biz { font-size: 12px; color: var(--fg-3); }
+
+    /* Fade in */
+    .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade.in { opacity: 1; transform: none; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface-subtle);
+      padding: 56px 24px 32px;
+    }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr; gap: 40px; margin-bottom: 48px; }
+    @media(min-width:640px) { .footer-top { grid-template-columns: 200px 1fr; } }
+    @media(min-width:900px) { .footer-top { grid-template-columns: 200px repeat(4,1fr); } }
+    .footer-brand p { font-size: 13px; color: var(--fg-3); margin-top: 10px; line-height: 1.6; }
+    .footer-col h4 { font-size: 13px; font-weight: 600; margin-bottom: 14px; color: var(--fg); }
+    .footer-col a { display: block; font-size: 13px; color: var(--fg-3); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--fg-2); }
+    .footer-bottom { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--fg-3); }
+    @media(min-width:640px) { .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
+
+    @media(max-width:767px) {
+      .nav-links { display: none; }
+      .menu-btn { display: block; }
+      .hero { padding: 100px 20px 60px; }
+      .hero h1 { font-size: clamp(32px, 9vw, 52px); letter-spacing: -0.025em; }
+      .hero p { font-size: 15px; }
+      .gets-item { padding: 8px 16px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ────────────────────────────────────────────── -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="/" style="display:flex;align-items:center;text-decoration:none;">
+        <img src="brand_assets/TCCC Logo.png" alt="The Coastal Content Co" style="height:48px;width:auto;" />
+      </a>
+      <div class="nav-links">
+        <a href="/#services">Services</a>
+        <a href="/#why-us">Why Us</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#testimonials">Clients</a>
+        <a href="#audit-form" class="btn-nav">Get your free audit</a>
+      </div>
+      <button class="menu-btn" id="menu-btn" aria-label="Menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="17" y2="6"/><line x1="3" y1="12" x2="17" y2="12"/><line x1="3" y1="18" x2="17" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile nav -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="/#services" onclick="closeMobileNav()">Services</a>
+    <a href="/#why-us" onclick="closeMobileNav()">Why Us</a>
+    <a href="/#pricing" onclick="closeMobileNav()">Pricing</a>
+    <a href="/#testimonials" onclick="closeMobileNav()">Clients</a>
+    <a href="#audit-form" class="btn-primary" style="text-align:center;text-decoration:none;font-size:15px;" onclick="closeMobileNav()">Get your free audit →</a>
+  </div>
+
+  <!-- ─── HERO ─────────────────────────────────────────────── -->
+  <section class="hero">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="dot-grid"></div>
+    <div style="position:relative;z-index:1;">
+      <div class="hero-anim" style="animation-delay:0.2s;">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Free · No strings attached · Results within 48 hours
+        </div>
+      </div>
+      <div class="hero-anim" style="animation-delay:0.4s;">
+        <h1>
+          Find out what's holding your<br/>business back <em>online.</em>
+        </h1>
+      </div>
+      <div class="hero-anim" style="animation-delay:0.55s;">
+        <p>Fill in the form below and we'll send you a personalised audit of your social media, Google profile, and website — completely free.</p>
+      </div>
+      <div class="hero-anim" style="animation-delay:0.7s;">
+        <div style="margin-top:40px;">
+          <a href="#audit-form" class="btn-primary" style="display:inline-flex;width:auto;padding:12px 28px;font-size:14px;text-decoration:none;">
+            Start your free audit <span style="font-size:16px;">↓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WHAT YOU GET STRIP ───────────────────────────────── -->
+  <div class="gets-strip">
+    <div class="gets-inner">
+      <div class="gets-item">
+        <svg class="gets-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Social media review
+      </div>
+      <div class="gets-item">
+        <svg class="gets-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Google Business audit
+      </div>
+      <div class="gets-item">
+        <svg class="gets-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Website quick-check
+      </div>
+      <div class="gets-item">
+        <svg class="gets-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Personalised recommendations
+      </div>
+      <div class="gets-item">
+        <svg class="gets-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Delivered in 48 hrs
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FORM + SOCIAL PROOF ──────────────────────────────── -->
+  <div style="max-width:1100px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 340px;gap:64px;align-items:start;" id="audit-form">
+
+    <!-- FORM -->
+    <div>
+      <p class="form-section-label">Your free audit</p>
+      <h2 style="font-size:clamp(26px,4vw,36px);font-weight:700;letter-spacing:-0.025em;margin-bottom:8px;">Tell us about your business</h2>
+      <p style="font-size:15px;color:var(--fg-2);margin-bottom:40px;line-height:1.65;">Takes 2 minutes. We'll do the rest and send a personalised report to your inbox.</p>
+
+      <!-- Success state -->
+      <div class="success-box" id="success-box">
+        <div class="success-icon">✓</div>
+        <h3>You're on the list!</h3>
+        <p>Thanks for submitting. We'll review your details and send your personalised audit within 48 hours.<br/><br/>Keep an eye on your inbox — and feel free to follow us on Instagram <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" style="color:var(--accent);text-decoration:none;">@thecoastalcontentco</a> while you wait.</p>
+      </div>
+
+      <!-- Form -->
+      <form id="audit-form-el" action="https://formspree.io/f/xaqllzny" method="POST">
+        <input type="hidden" name="_subject" value="New Free Audit Request" />
+
+        <p class="form-section-label" style="margin-bottom:20px;">About your business</p>
+
+        <div class="form-row">
+          <div>
+            <label class="form-label" for="biz-name">Business name <span>*</span></label>
+            <input id="biz-name" name="business_name" type="text" class="form-field" placeholder="e.g. Dunsborough Café" required />
+          </div>
+          <div>
+            <label class="form-label" for="industry">Industry <span>*</span></label>
+            <select id="industry" name="industry" class="form-field" required>
+              <option value="" disabled selected>Select your industry</option>
+              <option>Café / Restaurant / Food</option>
+              <option>Accommodation / Tourism</option>
+              <option>Retail</option>
+              <option>Trades / Construction</option>
+              <option>Health & Wellness</option>
+              <option>Winery / Brewery / Distillery</option>
+              <option>Professional Services</option>
+              <option>Real Estate</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="website">Website URL</label>
+          <input id="website" name="website_url" type="url" class="form-field" placeholder="https://yourbusiness.com.au" />
+        </div>
+
+        <div class="form-divider"></div>
+        <p class="form-section-label">Your online presence</p>
+
+        <div class="form-group">
+          <label class="form-label" style="margin-bottom:12px;">Which platforms are you on? <span style="color:var(--fg-3);font-weight:400;">(select all that apply)</span></label>
+          <div class="check-grid" id="platforms-grid">
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="platforms[]" value="Instagram" />
+              <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
+              Instagram
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="platforms[]" value="Facebook" />
+              <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
+              Facebook
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="platforms[]" value="Google Business" />
+              <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
+              Google Business
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="platforms[]" value="TikTok" />
+              <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
+              TikTok
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="platforms[]" value="LinkedIn" />
+              <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
+              LinkedIn
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="platforms[]" value="None yet" />
+              <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
+              None yet
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:20px;">
+          <label class="form-label" for="challenge">Biggest marketing challenge <span>*</span></label>
+          <select id="challenge" name="biggest_challenge" class="form-field" required>
+            <option value="" disabled selected>Choose one…</option>
+            <option>Not showing up in Google search results</option>
+            <option>Not enough followers or engagement on social media</option>
+            <option>Don't know what content to post</option>
+            <option>Website doesn't bring in leads</option>
+            <option>No time to manage social media consistently</option>
+            <option>Not sure where to start</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="goal">What would success look like for you?</label>
+          <textarea id="goal" name="success_goal" class="form-field" rows="3" placeholder="e.g. More locals finding us online, more bookings through Instagram, better Google reviews…"></textarea>
+        </div>
+
+        <div class="form-divider"></div>
+        <p class="form-section-label">How to reach you</p>
+
+        <div class="form-row">
+          <div>
+            <label class="form-label" for="name">Your name <span>*</span></label>
+            <input id="name" name="name" type="text" class="form-field" placeholder="First name" required />
+          </div>
+          <div>
+            <label class="form-label" for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" class="form-field" placeholder="04xx xxx xxx" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email address <span>*</span></label>
+          <input id="email" name="email" type="email" class="form-field" placeholder="you@yourbusiness.com.au" required />
+        </div>
+
+        <div style="margin-top:28px;">
+          <button type="submit" class="btn-primary" id="submit-btn">
+            Send my free audit request <span style="font-size:16px;">→</span>
+          </button>
+          <p style="font-size:12px;color:var(--fg-3);text-align:center;margin-top:12px;">No spam, ever. Your details are only used to prepare your audit.</p>
+        </div>
+
+        <!-- Error message -->
+        <div id="error-msg" style="display:none;margin-top:16px;padding:12px 16px;border-radius:8px;background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.25);color:#f97ba0;font-size:13px;">
+          Something went wrong — please try again or email us at <a href="mailto:vihangaf@thecoastalcontent.org" style="color:var(--accent);">vihangaf@thecoastalcontent.org</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- SOCIAL PROOF SIDEBAR -->
+    <div style="position:sticky;top:100px;" class="fade">
+      <p class="form-section-label" style="margin-bottom:20px;">What clients say</p>
+
+      <div class="proof-card">
+        <div class="proof-stars">★★★★★</div>
+        <p class="proof-text">"Within a week of working with The Coastal Content Co, our Instagram went from ghost town to actually getting DMs from locals. Couldn't believe the difference."</p>
+        <div class="proof-author">
+          <div class="proof-avatar" style="background:rgba(46,207,184,0.15);color:var(--accent);">SL</div>
+          <div>
+            <div class="proof-name">Sarah L.</div>
+            <div class="proof-biz">Café owner, Dunsborough</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proof-card">
+        <div class="proof-stars">★★★★★</div>
+        <p class="proof-text">"Our Google ranking went from page 3 to the top 3 results in under a month. More enquiries than we've had all year."</p>
+        <div class="proof-author">
+          <div class="proof-avatar" style="background:rgba(99,102,241,0.15);color:#818cf8;">MT</div>
+          <div>
+            <div class="proof-name">Mark T.</div>
+            <div class="proof-biz">Trades business, Busselton</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proof-card">
+        <div class="proof-stars">★★★★★</div>
+        <p class="proof-text">"The free audit alone was eye-opening. They found three things we'd been doing wrong for years. Signed up the same week."</p>
+        <div class="proof-author">
+          <div class="proof-avatar" style="background:rgba(244,63,94,0.15);color:#f97ba0;">JK</div>
+          <div>
+            <div class="proof-name">Jess K.</div>
+            <div class="proof-biz">Accommodation, Margaret River</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust note -->
+      <div style="margin-top:8px;padding:16px;border-radius:10px;border:1px solid var(--border);background:var(--surface-subtle);">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span style="font-size:13px;font-weight:600;color:var(--fg);">100% free, no obligation</span>
+        </div>
+        <p style="font-size:12px;color:var(--fg-3);line-height:1.6;">We don't charge for audits, ever. If you decide to work with us afterwards, great — if not, the report is still yours to keep.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" style="display:inline-flex;text-decoration:none;">
+            <img src="brand_assets/TCCC Logo.png" alt="The Coastal Content Co" style="height:160px;width:auto;" />
+          </a>
+          <p style="margin-top:10px;">AI-powered content and marketing for local South West businesses. Busselton & Dunsborough, WA.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="services/social-media.html">Social Media Content</a>
+          <a href="services/google-business.html">Google Profile Management</a>
+          <a href="services/website-rebuild.html">Website Rebuild</a>
+          <a href="services/website-copywriting.html">Website Copywriting</a>
+          <a href="services/ai-lead-response.html">AI Lead Response</a>
+          <a href="services/crm-automation.html">CRM & Automation</a>
+          <a href="services/email-marketing.html">Email Marketing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/#why-us">Why Us</a>
+          <a href="/#testimonials">Client Results</a>
+          <a href="/#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Area</h4>
+          <a href="#">Busselton</a>
+          <a href="#">Dunsborough</a>
+          <a href="#">Margaret River Region</a>
+          <a href="#">South West WA</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+            <a href="https://www.instagram.com/thecoastalcontentco" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#e1306c'" onmouseout="this.style.color='var(--fg-3)'">
+              <span style="width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </span>
+              @thecoastalcontentco
+            </a>
+            <a href="https://www.facebook.com/thecoastalcontentco" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='var(--fg-3)'">
+              <span style="width:28px;height:28px;border-radius:7px;background:#1877f2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </span>
+              The Coastal Content Co
+            </a>
+            <a href="https://www.x.com/coastalcontentco" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--fg-3)'">
+              <span style="width:28px;height:28px;border-radius:7px;background:#000;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </span>
+              @coastalcontentco
+            </a>
+            <a href="https://www.linkedin.com/company/thecoastalcontentco" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#0a66c2'" onmouseout="this.style.color='var(--fg-3)'">
+              <span style="width:28px;height:28px;border-radius:7px;background:#0a66c2;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              </span>
+              The Coastal Content Co
+            </a>
+          </div>
+          <a href="mailto:vihangaf@thecoastalcontent.org" style="font-size:12px;color:var(--fg-3);">vihangaf@thecoastalcontent.org</a>
+          <a href="tel:0478515414" style="font-size:12px;color:var(--fg-3);">0478 515 414</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 The Coastal Content Co · Busselton, WA</span>
+        <span>All systems go · Packages from $500/month</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    menuBtn.addEventListener('click', () => mobileNav.classList.toggle('open'));
+    function closeMobileNav() { mobileNav.classList.remove('open'); }
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+
+    // Checkbox toggle
+    function toggleCheck(label) {
+      label.classList.toggle('selected');
+      const cb = label.querySelector('input[type="checkbox"]');
+      cb.checked = label.classList.contains('selected');
+    }
+
+    // Form submission
+    const form = document.getElementById('audit-form-el');
+    const submitBtn = document.getElementById('submit-btn');
+    const successBox = document.getElementById('success-box');
+    const errorMsg = document.getElementById('error-msg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      errorMsg.style.display = 'none';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          successBox.style.display = 'block';
+          window.scrollTo({ top: successBox.offsetTop - 120, behavior: 'smooth' });
+        } else {
+          throw new Error('server error');
+        }
+      } catch {
+        errorMsg.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Send my free audit request <span style="font-size:16px;">→</span>';
+      }
+    });
+
+    // ── Glowy Waves Hero Canvas ─────────────────────────────────────
+    (function() {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d');
+      let animId, time = 0;
+
+      const mouse = { x: 0, y: 0 };
+      const target = { x: 0, y: 0 };
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const mouseInfluence = prefersReduced ? 10 : 70;
+      const influenceRadius = prefersReduced ? 160 : 320;
+      const smoothing = prefersReduced ? 0.04 : 0.1;
+
+      const waves = [
+        { offset: 0,              amplitude: 70, frequency: 0.003,  color: 'rgba(46,207,184,1)',     opacity: 0.45 },
+        { offset: Math.PI / 2,   amplitude: 90, frequency: 0.0026, color: 'rgba(46,207,184,0.7)',   opacity: 0.35 },
+        { offset: Math.PI,       amplitude: 60, frequency: 0.0034, color: 'rgba(99,102,241,0.65)',  opacity: 0.28 },
+        { offset: Math.PI * 1.5, amplitude: 80, frequency: 0.0022, color: 'rgba(244,63,94,0.5)',    opacity: 0.22 },
+        { offset: Math.PI * 2,   amplitude: 55, frequency: 0.004,  color: 'rgba(247,247,248,0.3)',  opacity: 0.18 },
+      ];
+
+      function resize() {
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        mouse.x = target.x = canvas.width / 2;
+        mouse.y = target.y = canvas.height / 2;
+      }
+
+      window.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        target.x = e.clientX - rect.left;
+        target.y = e.clientY - rect.top;
+      });
+
+      function drawWave(wave, time) {
+        const { offset, amplitude, frequency, color, opacity } = wave;
+        const w = canvas.width, h = canvas.height;
+        const midY = h * 0.5;
+
+        ctx.beginPath();
+        ctx.moveTo(0, h);
+
+        for (let x = 0; x <= w; x += 2) {
+          const dx = x - mouse.x;
+          const dy = midY - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const influence = Math.max(0, 1 - dist / influenceRadius) * mouseInfluence;
+
+          const y = midY
+            + Math.sin(x * frequency + time + offset) * amplitude
+            + Math.sin(x * frequency * 0.5 + time * 1.3 + offset) * amplitude * 0.4
+            + influence * Math.sin(x * 0.02 + time * 2);
+
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+
+        ctx.lineTo(w, h);
+        ctx.lineTo(0, h);
+        ctx.closePath();
+
+        const grad = ctx.createLinearGradient(0, 0, 0, h);
+        grad.addColorStop(0, color.replace(/[\d.]+\)$/, `${opacity})`));
+        grad.addColorStop(1, color.replace(/[\d.]+\)$/, '0)'));
+
+        ctx.fillStyle = grad;
+        ctx.globalCompositeOperation = 'screen';
+        ctx.fill();
+        ctx.globalCompositeOperation = 'source-over';
+      }
+
+      function animate() {
+        animId = requestAnimationFrame(animate);
+        time += prefersReduced ? 0.003 : 0.008;
+
+        mouse.x += (target.x - mouse.x) * smoothing;
+        mouse.y += (target.y - mouse.y) * smoothing;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        waves.forEach(w => drawWave(w, time));
+      }
+
+      window.addEventListener('resize', () => { cancelAnimationFrame(animId); resize(); animate(); });
+      resize();
+      animate();
+    })();
+
+    // ── Responsive sidebar stack on mobile ──────────────────────────
+    (function() {
+      const layout = document.querySelector('[style*="grid-template-columns:1fr 340px"]');
+      if (!layout) return;
+      function checkWidth() {
+        if (window.innerWidth < 900) {
+          layout.style.gridTemplateColumns = '1fr';
+          layout.style.gap = '40px';
+        } else {
+          layout.style.gridTemplateColumns = '1fr 340px';
+          layout.style.gap = '64px';
+        }
+      }
+      window.addEventListener('resize', checkWidth);
+      checkWidth();
+    })();
+  </script>
+</body>
+</html>
