@@ -421,36 +421,36 @@
         <div class="form-group">
           <label class="form-label" style="margin-bottom:12px;">Which platforms are you on? <span style="color:var(--fg-3);font-weight:400;">(select all that apply)</span></label>
           <div class="check-grid" id="platforms-grid">
-            <label class="check-item" onclick="toggleCheck(this)">
+            <div class="check-item" onclick="toggleCheck(this)" data-value="Instagram">
               <input type="checkbox" name="platforms[]" value="Instagram" />
               <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
               Instagram
-            </label>
-            <label class="check-item" onclick="toggleCheck(this)">
+            </div>
+            <div class="check-item" onclick="toggleCheck(this)" data-value="Facebook">
               <input type="checkbox" name="platforms[]" value="Facebook" />
               <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
               Facebook
-            </label>
-            <label class="check-item" onclick="toggleCheck(this)">
+            </div>
+            <div class="check-item" onclick="toggleCheck(this)" data-value="Google Business">
               <input type="checkbox" name="platforms[]" value="Google Business" />
               <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
               Google Business
-            </label>
-            <label class="check-item" onclick="toggleCheck(this)">
+            </div>
+            <div class="check-item" onclick="toggleCheck(this)" data-value="TikTok">
               <input type="checkbox" name="platforms[]" value="TikTok" />
               <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
               TikTok
-            </label>
-            <label class="check-item" onclick="toggleCheck(this)">
+            </div>
+            <div class="check-item" onclick="toggleCheck(this)" data-value="LinkedIn">
               <input type="checkbox" name="platforms[]" value="LinkedIn" />
               <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
               LinkedIn
-            </label>
-            <label class="check-item" onclick="toggleCheck(this)">
+            </div>
+            <div class="check-item" onclick="toggleCheck(this)" data-value="None yet">
               <input type="checkbox" name="platforms[]" value="None yet" />
               <span class="check-box"><svg class="check-tick" width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#080E1C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 3 5 9 2 6"/></svg></span>
               None yet
-            </label>
+            </div>
           </div>
         </div>
 
@@ -647,10 +647,10 @@
     document.querySelectorAll('.fade').forEach(el => observer.observe(el));
 
     // Checkbox toggle
-    function toggleCheck(label) {
-      label.classList.toggle('selected');
-      const cb = label.querySelector('input[type="checkbox"]');
-      cb.checked = label.classList.contains('selected');
+    function toggleCheck(el) {
+      el.classList.toggle('selected');
+      const cb = el.querySelector('input[type="checkbox"]');
+      cb.checked = el.classList.contains('selected');
     }
 
     // Form submission
